@@ -9,16 +9,15 @@
  */
 
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "weatherxweb";
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbdatabase = "weatherxweb";
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $db);
+$link = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbdatabase);
 
 // Check connection
-if (!$conn) {
+if (!$link) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
