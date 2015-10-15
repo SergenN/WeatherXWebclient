@@ -6,6 +6,8 @@
  * Time: 10:40
  */
 
+include '../includes/db_connect.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -38,4 +40,10 @@
 </div>
 
 </body>
+
+<?php
+
+include '../includes/footer.php';
+
+?>
 </html>
