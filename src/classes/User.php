@@ -38,6 +38,14 @@ class User {
         $this->save();
     }
 
+    /**
+     * Function to log out
+     */
+    public function logOut() {
+        $this->isLoggedIn = false;
+        session_destroy();
+    }
+
     public function getName(){
         return $this->userName;
     }

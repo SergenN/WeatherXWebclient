@@ -42,7 +42,7 @@ if(!$user->isLoggedIn()) {
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
-                        <li><a href="#">Log out</a></li>
+                        <li><a href="logout.php">Log out</a></li>
                     </ul>
                 </div>
             </div>
