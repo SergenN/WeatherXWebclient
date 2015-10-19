@@ -42,7 +42,6 @@ class User {
      * Function to log out
      */
     public function logOut() {
-        $this->isLoggedIn = false;
         session_destroy();
     }
 
