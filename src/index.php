@@ -33,12 +33,10 @@ if(!$user->isLoggedIn()) {
             <div class="container">
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
-
                         <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Home</a></li>
-                        <li><a href="test.html"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
-                        <li><a href="test2.html"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
-                        <li><a href="test3.html"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
-
+                        <li><a href="temperature.php"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
+                        <li><a href="rainfall.php"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
+                        <li><a href="wind.php"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
@@ -47,6 +45,7 @@ if(!$user->isLoggedIn()) {
                 </div>
             </div>
         </nav>
+    </div>
 
 <br /> <br /> <br />
 
@@ -57,7 +56,7 @@ if(!$user->isLoggedIn()) {
         </div>
         <!--<p><a href="http://umap.openstreetmap.fr/nl/map/untitled-map_56362">See full screen</a></p>-->
 
-    </div>
+    <!-- </div> -->
     <script src="other/js/bootstrap.min.js"></script>
 </body>
 </html>

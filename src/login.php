@@ -43,7 +43,6 @@ if ($user->isLoggedIn()){
             <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
         </div>
         <button type="submit" name="submitLogin" class="btn btn-default">Login</button>
-        <button type="button" class="btn btn-danger">I lost my credentials</button>
     </form>
 </div>
 
