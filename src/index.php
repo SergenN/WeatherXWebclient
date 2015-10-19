@@ -35,11 +35,14 @@ if(!$user->isLoggedIn()) {
                     <ul class="nav navbar-nav">
 
                         <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Home</a></li>
-                        <li><a href="test.html">test</a></li>
-                        <li><a href="test2.html">test2</a></li>
-                        <li><a href="logout">logout</a></li>
+                        <li><a href="test.html"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
+                        <li><a href="test2.html"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
+                        <li><a href="test3.html"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
 
-                        <li><a href=""><?php echo "HALLO ". $user->getName() . "!"; ?></a></li>
+                        <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Log out</a></li>
                     </ul>
                 </div>
             </div>
