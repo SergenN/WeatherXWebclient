@@ -39,9 +39,9 @@ if(!$user->isLoggedIn()) {
                         <li><a href="test2.html"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
                         <li><a href="test3.html"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
 
-                        <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
                         <li><a href="#">Log out</a></li>
                     </ul>
                 </div>
@@ -51,15 +51,17 @@ if(!$user->isLoggedIn()) {
 <br /> <br /> <br />
 
         <div class="row">
-            <div class="container">
                 <div class="col-md-12">
                     <iframe width="100%" height="700px" frameBorder="0" src="http://umap.openstreetmap.fr/nl/map/untitled-map_56362?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&datalayersControl=true&onLoadPanel=undefined&captionBar=false"></iframe>
                 </div>
-            </div>
         </div>
         <!--<p><a href="http://umap.openstreetmap.fr/nl/map/untitled-map_56362">See full screen</a></p>-->
 
     </div>
-    <script src="../other/js/bootstrap.min.js"></script>
+    <script src="other/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php
+    //session_destroy();
+?>

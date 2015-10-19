@@ -50,13 +50,16 @@ class User {
      * @param $userMail
      * @param $password
      * @param SQLConnection $SQLConnection
+     * @return bool
      */
     public function validateLogin($userMail, $password, $SQLConnection){
         $result = $SQLConnection->query("SELECT * FROM users WHERE email = '".$userMail."' AND password = '".$password."';");
         if ($result->num_rows > 0){
             $row = $result->fetch_assoc();
             $this->setLoggedIn($row['id'], $row['name'], $row['level'], $row['email']);
+            return true;
         }
+        return false;
     }
 
 }
