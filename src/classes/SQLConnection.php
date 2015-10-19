@@ -26,6 +26,10 @@ class SQLConnection {
         return $this->mysqlConn->query($SQLQuery);
     }
 
+    public function exists($SQLQuery){
+        return $this->query($SQLQuery)->num_rows > 0;
+    }
+
     public function close(){
         $this->mysqlConn->close();
     }
