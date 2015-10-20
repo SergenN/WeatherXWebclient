@@ -57,6 +57,7 @@ if(!$user->isLoggedIn()) {
         <!--<p><a href="http://umap.openstreetmap.fr/nl/map/untitled-map_56362">See full screen</a></p>-->
 
     <!-- </div> -->
+    </div>
     <script src="other/js/bootstrap.min.js"></script>
 </body>
 </html>

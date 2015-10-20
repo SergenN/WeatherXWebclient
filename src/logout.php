@@ -8,7 +8,9 @@
 
 require_once 'includes/init.php';
 
-$user->logOut();
+if ($user->isLoggedIn()) {
+    $user->logOut();
+}
 header("Location: login.php");
 
 ?>
