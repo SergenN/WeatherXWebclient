@@ -14,34 +14,44 @@ if(!$user->isLoggedIn()) {
 
 $winddirection = 2;
 
+/**
+ * Translates the amount of degrees to a proper English word
+ * TODO: fix amounts
+ * TODO: move function to other file/place
+ * @param $winddirection
+ * @return string
+ */
 function degreesToText($winddirection) {
     if($winddirection >= 0 && $winddirection <= 360) {
         switch($winddirection) {
-            case $winddirection <= 27.5 || $winddirection > 332.5:
+            case $winddirection <= 22.5 || $winddirection > 337.5:
                 $text = "North";
                 break;
-            case $winddirection > 27.5  || $winddirection <= 73.5:
+            case $winddirection > 22.5  || $winddirection <= 67.5:
                 $text = "Northeast";
                 break;
-            case $winddirection > 73.5 || $winddirection <= 118.5 :
+            case $winddirection > 67.5 || $winddirection <= 107.5 :
                 $text = "East";
                 break;
-            case $winddirection > 118.5 || $winddirection <= 163.5:
+            case $winddirection > 107.5 || $winddirection <= 152.5:
                 $text = "Southeast";
                 break;
-            case $winddirection > 163.5 || $winddirection <= 208.5:
+            case $winddirection > 152.5 || $winddirection <= 197.5:
                 $text = "South";
                 break;
-            case $winddirection > 208.5 || $winddirection <= 253.5:
+            case $winddirection > 197.5 || $winddirection <= 242.5:
                 $text = "Southweat";
                 break;
-            case $winddirection > 19 || $winddirection <= 242.5:
+            case $winddirection > 242.5 || $winddirection <= 287.5:
                 $text = "West";
                 break;
-            case $winddirection > 287.5 || $winddirection <= 332.5 :
+            case $winddirection > 287.5 || $winddirection <= 337.5 :
                 $text = "Northwest";
                 break;
+            default:
+                $text = "Unknown";
         }
+        return $text;
     }
 }
 ?>

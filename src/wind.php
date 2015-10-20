@@ -68,9 +68,3 @@ if(!$user->isLoggedIn()) {
 <script src="other/js/bootstrap.min.js"></script>
 </body>
 </html>
-=======
- * User: serge
- * Date: 19-10-2015
- * Time: 17:02
- */
->>>>>>> origin/master
