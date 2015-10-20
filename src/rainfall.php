@@ -34,8 +34,8 @@ if(!$user->isLoggedIn()) {
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Home</a></li>
-                    <li class="active"><a href="temperature.php"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
-                    <li><a href="rainfall.php"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
+                    <li><a href="temperature.php"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
+                    <li class="active"><a href="rainfall.php"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
                     <li><a href="wind.php"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -48,19 +48,19 @@ if(!$user->isLoggedIn()) {
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 1! In dit blok komen de gemiddelde temperaturen van China en Japan, plus het gemiddelde van die twee gegevens.</p>
+                <p>Hallo! Dit is blok 1! In dit blok wordt per land weergegeven hoeveel regen er gemiddeld valt.</p>
             </div>
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 2! In dit blok komt een grafiek met de gemiddelde temparaturen.</p>
+                <p>Hallo! Dit is blok 2! In dit blok komt een grafiek met de gemiddelde hoeveelheid regen.</p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 3! In dit blok komt een tabel met weerstations.</p>
+                <p>Hallo! Dit is blok 3! In dit blok komt een tabel met de gemiddelde hoeveelheid regen die valt per weerstation.</p>
             </div>
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 4! In dit blok komt een kaart met weerstations.</p>
+                <p>Hallo! Dit is blok 4! In dit blok komt een kaart met het gebied waar gemeten wordt.</p>
             </div>
         </div>
     </div>

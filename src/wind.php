@@ -34,9 +34,9 @@ if(!$user->isLoggedIn()) {
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Home</a></li>
-                    <li class="active"><a href="temperature.php"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
+                    <li><a href="temperature.php"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
                     <li><a href="rainfall.php"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
-                    <li><a href="wind.php"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
+                    <li class="active"><a href="wind.php"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
@@ -48,19 +48,16 @@ if(!$user->isLoggedIn()) {
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 1! In dit blok komen de gemiddelde temperaturen van China en Japan, plus het gemiddelde van die twee gegevens.</p>
+                <p>Hallo! Dit is blok 1! In dit blok komt een pijl die de gemiddelde windrichting moet voorstellen van alle weerstations.</p>
             </div>
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 2! In dit blok komt een grafiek met de gemiddelde temparaturen.</p>
+                <p>Hallo! Dit is blok 2! In dit blok komt de gemiddelde windsnelheid van alle weerstations.</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <p>Hallo! Dit is blok 3! In dit blok komt een tabel met weerstations.</p>
-            </div>
-            <div class="col-md-6">
-                <p>Hallo! Dit is blok 4! In dit blok komt een kaart met weerstations.</p>
+            <div class="col-md-12">
+                <p>Hallo! Dit is blok 3! In it blok komt een tabel met weerstations per regio en hun gemiddelden.</p>
             </div>
         </div>
     </div>

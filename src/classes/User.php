@@ -25,10 +25,21 @@ class User {
         $this->save();
     }
 
+    /**
+     * Checks if a user is logged in.
+     * @return bool
+     */
     public function isLoggedIn(){
         return $this->isLoggedIn;
     }
 
+    /**
+     * Login method for a user.
+     * @param $id
+     * @param $name
+     * @param $level
+     * @param $mail
+     */
     public function setLoggedIn($id, $name, $level, $mail){
         $this->isLoggedIn = true;
         $this->userID = $id;
@@ -46,15 +57,24 @@ class User {
         session_destroy();
     }
 
+    /**
+     * Get the username of a user
+     * @return string
+     */
     public function getName(){
         return $this->userName;
     }
 
+    /**
+     * Serialize user data.
+     * Initiates valid session.
+     */
     public function save(){
         $_SESSION['user'] = serialize($this);
     }
 
     /**
+     * Checks if an attempt to login is valid.
      * @param $userMail
      * @param $password
      * @param SQLConnection $SQLConnection
