@@ -18,6 +18,15 @@ if(!$user->isLoggedIn()) {
 <head lang="en">
     <title>WeatherX</title>
     <link rel="stylesheet" href="other/css/bootstrap.min.css">
+    <script src="other/js/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+        // Load the Visualization API library and the piechart library.
+        google.load('visualization', '1', {'packages':['corechart']});
+        //google.setOnLoadCallback(drawChart);
+    </script>
 </head>
 <body>
     <div class="container-fluid">
