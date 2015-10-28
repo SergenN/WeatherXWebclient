@@ -16,41 +16,27 @@ if ($user->isLoggedIn()){
     header("Location: index.php");
 }
 
-?>
-
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>Home - WeatherX</title>
-    <link rel="stylesheet" href="other/css/bootstrap.min.css">
-</head>
-
-<body>
-<div class="col-md-6 col-md-offset-3">
-    <br>
-    <img src="other/img/logo.png" style="display: block; margin-left: auto; margin-right: auto">
-    <br>
-
-    <p style="text-align: center">Welcome on WeatherX. Please login to access the weather data from our database.</p><br>
-
-    <form method="post" action="">
-        <div class="form-group">
-            <label for="inputEmail">Email address</label>
-            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
-        </div>
-        <button type="submit" name="submitLogin" class="btn btn-default">Login</button>
-    </form>
-</div>
-
-</body>
-
-<?php
-
-include 'includes/footer.php';
+$title = "Login";
 
 ?>
-</html>
+<?php include_once 'includes/header.php'; ?>
+    <div class="col-md-6 col-md-offset-3">
+        <br>
+        <img src="other/img/logo.png" style="display: block; margin-left: auto; margin-right: auto">
+        <br>
+
+        <p style="text-align: center">Welcome on WeatherX. Please login to access the weather data from our database.</p><br>
+
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
+            </div>
+            <button type="submit" name="submitLogin" class="btn btn-default">Login</button>
+        </form>
+    </div>
+<?php include_once 'includes/footer.php'; ?>

@@ -12,41 +12,12 @@ require_once 'includes/init.php';
 if(!$user->isLoggedIn()) {
     header("Location: login.php");
 }
-?>
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>WeatherX</title>
-    <link rel="stylesheet" href="other/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="container">
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Home</a></li>
-                    <li><a href="temperature.php"><span class="glyphicon glyphicon-certificate"></span> Temperature</a></li>
-                    <li class="active"><a href="rainfall.php"><span class="glyphicon glyphicon-stats"></span> Rainfall</a></li>
-                    <li><a href="wind.php"><span class="glyphicon glyphicon-flag"></span> Wind</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
-                    <li><a href="logout.php">Log out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
+$title = "Rainfall";
+?>
+<?php include_once 'includes/header.php'; ?>
+<?php include_once 'includes/navbar.php'; ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -67,8 +38,4 @@ if(!$user->isLoggedIn()) {
     </div>
 </div>
 
-
-<!-- </div> -->
-<script src="other/js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php include_once 'includes/footer.php'; ?>
