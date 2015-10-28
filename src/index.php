@@ -63,14 +63,7 @@ if(!$user->isLoggedIn()) {
                     <iframe width="100%" height="700px" frameBorder="0" src="http://umap.openstreetmap.fr/nl/map/untitled-map_56362?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&datalayersControl=true&onLoadPanel=undefined&captionBar=false"></iframe>
                 </div>
         </div>
-        <!--<p><a href="http://umap.openstreetmap.fr/nl/map/untitled-map_56362">See full screen</a></p>-->
-
-    <!-- </div> -->
     </div>
     <script src="other/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<?php
-    //session_destroy();
-?>

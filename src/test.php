@@ -1,83 +1,53 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Sergen
- * Date: 20-10-2015
- * Time: 11:18
- */
-
-?>
-
 <!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>WebSocket Chat</title>
-    <script src="other/js/jquery-2.1.4.min.js"></script>
-    <script src="other/js/SocketStream.js"></script>
-</head>
-<body>
-<h1>WebSocket Chat</h1>
-<!--<form id="SendMSG">
-    <input id="message" type="text" title="bericht"/>
-    <input id="submit" type="submit" name="zend" title="verzend"/>
-</form>
-<script src="other/js/jquery-2.1.4.min.js"></script>
-<script>
-    var ws = $.websocket("ws://127.0.0.1:8080/", {
-        events: {
-            message: function(e) { $('#content').append(e.data + '<br>') }
-        }
-    });
-    $('#SendMSG').submit(function(e){
-        e.preventDefault();
-        ws.send('message', $('#message').val());
-        $('#message').val('')
-    });
-</script>-->
-</body>
-</html>
-<!--
 <html lang="en">
 <head>
-    <title>Node Based Echo</title>
-    <script src="other/js/jquery-2.1.4.min.js" type="text/javascript"></script>
-    <script src="other/js/jquery.websocket-0.0.1.js" type="text/javascript"></script>
-    <script src="other/js/jquery.json-2.2.min.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <title>submit demo</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-<script type="text/javascript">
 
-    // sends a message to the websocket server
-    function sendToServer() {
-        ws.send('krakenmsgA', '{ messageTextA: ' + $("#echoText").val() + ' }');
-        ws.send('krakenmsgB', '{ messageTextB: ' + $('#echoText').val() + ' }');
-    }
+<h1>Zend een bericht</h1>
+<form id="jqtest">
+    <div>
+        <input type="text" id="mesg" placeholder="T3k5t Pl0x">
+        <input type="submit" value="verzenden">
+    </div>
+</form>
+<br />
+<div id="textarea" style=" width: 500px; border: 1px solid blue;">
+   <b>Message terminal</b> <br />
+</div>
 
-    // set-up web socket
-    var ws = $.websocket("ws://localhost:8080/", "kraken-protocol", {
-        open: function () { },
-        close: function () { alert('websocket has been closed'); },
-        events: {
-            krakenmsgA: function (e) { $('#returnText').append(e.data + "<br/>"); },
-            krakenmsgB: function (e) { $('#returnText').append(e.data + "<br/>"); }
-        }
+<script>
+    var ws = new WebSocket("ws://127.0.0.1:8080/");
+
+    ws.onopen = function() {
+        $( "#textarea" ).append('<b style="color:red;">Connectie gemaakt met de server</b><br />');
+        ws.send("Hello Server");
+    };
+
+    ws.onmessage = function (evt) {
+        $( "#textarea" ).append("Server: " + evt.data + "<br />");
+    };
+
+    ws.onclose = function() {
+        $( "#textarea" ).append('<b style="color:red;">Connectie gesloten</b><br />');
+    };
+
+    ws.onerror = function(err) {
+        $( "#textarea" ).append('<b style="color:red;">Connectie Afgebroken'+err+'</b><br />');
+    };
+
+    $( "#jqtest" ).submit(function( event ) {
+        var message = $('#mesg');
+        ws.send(message.val());
+        $( "#textarea" ).append("You: " + message.val() + "<br />");
+        message.val('');
+        event.preventDefault();
     });
 
 </script>
-<div>
-    <div style="float: left; clear: left; padding-top: 2px;">
-        Your text:
-    </div>
-    <div style="float: left; padding-left: 20px;">
-        <input type="text" id="echoText" style="width: 150px;" required />
-    </div>
-    <div style="clear: left;">
-        <input type="button" onclick="sendToServer();" value="Send" />
-    </div>
-    <div id="returnText" style="clear: left; height: 200px; padding-top: 30px;">
-    </div>
-</div>
-</body>
-</html>-->
 
+</body>
+</html>
