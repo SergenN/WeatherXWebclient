@@ -25,22 +25,164 @@ $title = "Rainfall";
 
     <div class="row">
         <div class="col-md-6">
-            <p>Hallo! Dit is blok 1! In dit blok wordt per land weergegeven hoeveel regen er gemiddeld valt.</p>
-            <div id="data_div"></div>
+            <h3>Average rainfall per country</h3>
+            <table data-toggle="table" id="events-table" data-url="data2.json" data-height="300" data-pagination="true" data-page-list="[5, 10, 20, 50, 100]">
+                <thead>
+                <tr>
+                    <th data-field="country" data-sortable="true">Country</th>
+                    <th data-field="wdsp" data-sortable="true">Average rainfall</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+                <tr>
+                    <td>Netherlands</td>
+                    <td>30 mm</td>
+                </tr>
+            </table>
         </div>
         <div class="col-md-6">
-            <p>Hallo! Dit is blok 2! In dit blok komt een grafiek met de gemiddelde hoeveelheid regen..</p>
+            <h3>Average rainfall in the area</h3>
             <div id="curve_div"></div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <p>Hallo! Dit is blok 3! In dit blok komt een tabel met de gemiddelde hoeveelheid regen die valt per weerstation.</p>
-            <div id="table_div"></div>
+            <h3>Average rainfall per weather station</h3>
+
+            <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+                <thead>
+                <tr>
+                    <th data-field="stn" data-sortable="true">Station</th>
+                    <th data-field="country" data-sortable="true">Country</th>
+                    <th data-field="wdsp" data-sortable="true">Average rainfall</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+                <tr>
+                    <td>De Bilt</td>
+                    <td>Netherlands</td>
+                    <td>20 km/h</td>
+                </tr>
+            </table>
         </div>
         <div class="col-md-6">
-            <p>Hallo! Dit is blok 4! In dit blok komt een kaart met het gebied waar gemeten wordt.</p>
+            <h3>Map</h3>
             <div id="map_div"></div>
         </div>
     </div>

@@ -21,7 +21,7 @@ $title = "Station";
 
     <div class="page-header">
         <h1>De Bilt</h1>
-        <h4>The Netherlands</h4>
+        <h4>62600 - The Netherlands</h4>
     </div>
 
     <div class="row">
@@ -53,7 +53,7 @@ $title = "Station";
         <div class="col-md-6">
             <table class="table">
                 <tr>
-                    <td><strong>Windspeed</strong></td>
+                    <td><strong>Wind speed</strong></td>
                     <td>10,8 km/h</td>
                 </tr>
                 <tr>

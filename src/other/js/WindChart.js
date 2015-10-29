@@ -11,7 +11,7 @@ google.setOnLoadCallback(drawChart);
 
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
-        ['Seconden', 'Regen'],
+        ['Seconds', 'Wind speed'],
         ['1',  30],
         ['2',  31],
         ['3',  32],
@@ -19,7 +19,7 @@ function drawChart() {
     ]);
 
     var options = {
-        title: 'Gemiddelde hoeveelheid regen',
+        title: 'Average wind speed',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
@@ -35,7 +35,7 @@ google.setOnLoadCallback(drawTable);
 function drawTable() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Country');
-    data.addColumn('number', 'Avg. Rainfall');
+    data.addColumn('number', 'Average wind speed');
     data.addRows([
         ['Nether-lands',  {v: 200, f: '200mm'}],
         ['North Korea',   {v:-50,   f: '-50mm (cuz of kim)'}],
