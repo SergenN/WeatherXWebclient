@@ -18,6 +18,11 @@ $title = "Temperature";
 <?php include_once 'includes/header.php'; ?>
 <?php include_once 'includes/navbar.php'; ?>
     <div class="container">
+
+        <div class="page-header">
+            <h1>Average temperatures in Japan and China</h1>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <p>Hallo! Dit is blok 1! In dit blok komen de gemiddelde temperaturen van China en Japan, plus het gemiddelde van die twee gegevens.</p>
@@ -40,6 +45,8 @@ $title = "Temperature";
             </div>
         </div>
     </div>
+
+
     <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['line','table', 'corechart']}]}"></script>
     <script src="other/js/TemperatureChart.js"></script>
 
