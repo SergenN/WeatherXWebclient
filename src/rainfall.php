@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
-<<<<<<< HEAD
  * User: Leon
  * Date: 19-10-2015
  * Time: 16:26
@@ -19,6 +18,11 @@ $title = "Rainfall";
 <?php include_once 'includes/navbar.php'; ?>
 
 <div class="container">
+
+    <div class="page-header">
+        <h1>Rainfall in the Pacific and the coastline of Asia</h1>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
             <p>Hallo! Dit is blok 1! In dit blok wordt per land weergegeven hoeveel regen er gemiddeld valt.</p>

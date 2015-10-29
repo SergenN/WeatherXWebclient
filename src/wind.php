@@ -18,7 +18,13 @@ $title = "Wind";
 
 <?php include_once 'includes/header.php'; ?>
 <?php include_once 'includes/navbar.php'; ?>
+
     <div class="container">
+
+        <div class="page-header">
+            <h1>Average wind speed and direction worldwide</h1>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <p>Hallo! Dit is blok 1! In dit blok komt een pijl die de gemiddelde windrichting moet voorstellen van alle weerstations.</p>
@@ -33,7 +39,19 @@ $title = "Wind";
         <div class="row">
             <div class="col-md-12">
                 <p>Hallo! Dit is blok 3! In it blok komt een tabel met weerstations per regio en hun gemiddelden.</p>
-                <div id="table_div"></div>
+
+                <table class="table">
+                    <tr>
+                        <td>Gegroet</td>
+                        <td>Hallo</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Moi</td>
+                        <td>Bonjour</td>
+                        <td>Hello</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
