@@ -18,22 +18,27 @@ $title = "Wind";
 
 <?php include_once 'includes/header.php'; ?>
 <?php include_once 'includes/navbar.php'; ?>
-
-    <div class="col-md-12">
+    <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <p>Hallo! Dit is blok 1! In dit blok komt een pijl die de gemiddelde windrichting moet voorstellen van alle weerstations.</p>
+                <div id="arrow_div"></div>
             </div>
             <div class="col-md-6">
                 <p>Hallo! Dit is blok 2! In dit blok komt de gemiddelde windsnelheid van alle weerstations.</p>
+                <div id="curve_div"></div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
                 <p>Hallo! Dit is blok 3! In it blok komt een tabel met weerstations per regio en hun gemiddelden.</p>
+                <div id="table_div"></div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['line','table', 'corechart']}]}"></script>
+    <script src="other/js/WindChart.js"></script>
 
 <?php include_once 'includes/footer.php'; ?>
