@@ -25,22 +25,22 @@ $title = "Temperature";
 
         <div class="row">
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 1! In dit blok komen de gemiddelde temperaturen van China en Japan, plus het gemiddelde van die twee gegevens.</p>
+                <h3>Averages</h3>
                 <div id="data_div"></div>
             </div>
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 2! In dit blok komt een grafiek met de gemiddelde temparaturen.</p>
+                <h3>Graph</h3>
                 <div id="curve_div"></div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 3! In dit blok komt een tabel met weerstations.</p>
+                <h3>Summary</h3>
                 <div id="table_div"></div>
             </div>
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 4! In dit blok komt een kaart met weerstations.</p>
+                <h3>Map</h3>
                 <div id="map_div"></div>
             </div>
         </div>

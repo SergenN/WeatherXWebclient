@@ -13,5 +13,6 @@
         <link rel="stylesheet" href="other/css/bootstrap.min.css">
         <script src="other/js/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" href="other/css/style.css">
+        <link rel="stylesheet" href="other/css/bootstrap-table.css">
     </head>
     <body>

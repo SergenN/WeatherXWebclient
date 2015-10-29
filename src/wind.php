@@ -27,29 +27,112 @@ $title = "Wind";
 
         <div class="row">
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 1! In dit blok komt een pijl die de gemiddelde windrichting moet voorstellen van alle weerstations.</p>
+                <h3>Average wind direction</h3>
                 <div id="arrow_div"></div>
             </div>
             <div class="col-md-6">
-                <p>Hallo! Dit is blok 2! In dit blok komt de gemiddelde windsnelheid van alle weerstations.</p>
+                <h3>Average wind speed</h3>
                 <div id="curve_div"></div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <p>Hallo! Dit is blok 3! In it blok komt een tabel met weerstations per regio en hun gemiddelden.</p>
 
-                <table class="table">
+                <h3>Summary</h3>
+
+                <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+                    <thead>
+                        <tr>
+                            <th data-field="stn" data-sortable="true">Station</th>
+                            <th data-field="country" data-sortable="true">Country</th>
+                            <th data-field="wdsp" data-sortable="true">Wind speed</th>
+                            <th data-field="wnddir" data-sortable="true">Wind direction</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>De Bilt</td>
+                        <td>Netherlands</td>
+                        <td>20 km/h</td>
+                        <td>Northwest</td>
+                    </tr>
+                    <tr>
+                        <td>Groningen Ap Eelde</td>
+                        <td>Netherlands</td>
+                        <td>17 km/h</td>
+                        <td>West</td>
+                    </tr>
                     <tr>
                         <td>Gegroet</td>
                         <td>Hallo</td>
+                        <td>Hoi</td>
                         <td>Hoi</td>
                     </tr>
                     <tr>
                         <td>Moi</td>
                         <td>Bonjour</td>
                         <td>Hello</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Gegroet</td>
+                        <td>Hallo</td>
+                        <td>Hoi</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Moi</td>
+                        <td>Bonjour</td>
+                        <td>Hello</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Gegroet</td>
+                        <td>Hallo</td>
+                        <td>Hoi</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Moi</td>
+                        <td>Bonjour</td>
+                        <td>Hello</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Gegroet</td>
+                        <td>Hallo</td>
+                        <td>Hoi</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Moi</td>
+                        <td>Bonjour</td>
+                        <td>Hello</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Gegroet</td>
+                        <td>Hallo</td>
+                        <td>Hoi</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Moi</td>
+                        <td>Bonjour</td>
+                        <td>Hello</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Gegroet</td>
+                        <td>Hallo</td>
+                        <td>Hoi</td>
+                        <td>Hoi</td>
+                    </tr>
+                    <tr>
+                        <td>Moi</td>
+                        <td>Bonjour</td>
+                        <td>Hello</td>
+                        <td>Hoi</td>
                     </tr>
                 </table>
             </div>
