@@ -29,11 +29,11 @@ $title = "Temperature";
                 <h3>Averages</h3>
                 <table class="table">
                     <tr>
-                        <td>China</td>
+                        <td><strong>China</strong></td>
                         <td>8 &deg;C</td>
                     </tr>
                     <tr>
-                        <td>Japan</td>
+                        <td><strong>Japan</strong></td>
                         <td>10 &deg;C</td>
                     </tr>
                     <tr>
@@ -41,7 +41,7 @@ $title = "Temperature";
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>Total area</td>
+                        <td><strong>Total area</strong></td>
                         <td>9 &deg;C</td>
                     </tr>
                 </table>
