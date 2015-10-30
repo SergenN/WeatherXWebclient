@@ -6,7 +6,7 @@
  * Created by Sergen on 28-10-2015.
  */
 
-google.load('visualization', '1.1', {packages: ['line', 'corechart']});
+google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(drawChart);
 
 function drawChart() {
@@ -29,21 +29,43 @@ function drawChart() {
     chart.draw(data, options);
 }
 
+/* Map functions */
+google.load("visualization", "1", {packages:["map"]});
+google.setOnLoadCallback(drawMap);
 
-google.setOnLoadCallback(drawTable);
-
-function drawTable() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Country');
-    data.addColumn('number', 'Average temperature');
-    data.addRows([
-        ['Nether-lands',  {v: 200, f: '200mm'}],
-        ['North Korea',   {v:-50,   f: '-50mm (cuz of kim)'}],
-        ['Deutsche Reich!', {v: 150, f: '150mm'}],
-        ['China (Town)',   {v: 75,  f: '75mm'}]
+function drawMap() {
+    var data = google.visualization.arrayToDataTable([
+        ['Lat', 'Long', 'Name'],
+        [37.4232, -122.0853, 'Work'],
+        [37.4289, -122.1697, 'University'],
+        [37.6153, -122.3900, 'Airport'],
+        [37.4422, -122.1731, 'Shopping']
     ]);
 
-    var table = new google.visualization.Table(document.getElementById('table_div'));
-
-    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    var map = new google.visualization.Map(document.getElementById('map_div'));
+    map.draw(data, {showTip: true});
 }
+
+
+/* Table functions */
+
+
+/* Socket functions */
+
+var socket = new WebSocket("ws://127.0.0.1:8080/");
+
+ws.onopen = function() {
+    alert("Opened!");
+    ws.send("Hello Server");
+};
+
+ws.onmessage = function (evt) {
+    var data = evt.data();
+};
+
+ws.onclose = function() {
+};
+
+ws.onerror = function(err) {
+
+};

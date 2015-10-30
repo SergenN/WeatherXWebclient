@@ -138,7 +138,7 @@ $title = "Wind";
         </div>
     </div>
 
-    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['line','table', 'corechart']}]}"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="other/js/WindChart.js"></script>
 
 <?php include_once 'includes/footer.php'; ?>
