@@ -25,7 +25,7 @@ $title = "Rainfall";
 
     <div class="row">
         <div class="col-md-6">
-            <h3>Average rainfall per country</h3>
+            <h3>Average rainfall near the coastline per country</h3>
             <table data-toggle="table" id="events-table" data-url="data2.json" data-height="300" data-pagination="true" data-page-list="[5, 10, 20, 50, 100]">
                 <thead>
                 <tr>
@@ -34,59 +34,27 @@ $title = "Rainfall";
                 </tr>
                 </thead>
                 <tr>
-                    <td>Netherlands</td>
+                    <td>China</td>
                     <td>30 mm</td>
                 </tr>
                 <tr>
-                    <td>Netherlands</td>
+                    <td>Japan</td>
                     <td>30 mm</td>
                 </tr>
                 <tr>
-                    <td>Netherlands</td>
+                    <td>Taiwan</td>
                     <td>30 mm</td>
                 </tr>
                 <tr>
-                    <td>Netherlands</td>
+                    <td>South Korea</td>
                     <td>30 mm</td>
                 </tr>
                 <tr>
-                    <td>Netherlands</td>
+                    <td>Vietnam</td>
                     <td>30 mm</td>
                 </tr>
                 <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Netherlands</td>
+                    <td>Philippines</td>
                     <td>30 mm</td>
                 </tr>
             </table>
