@@ -64,6 +64,10 @@ class User {
         return $this->userName;
     }
 
+    public function getUserLevel(){
+        return $this->userLevel;
+    }
+
     /**
      * Serialize user data.
      * Initiates valid session.

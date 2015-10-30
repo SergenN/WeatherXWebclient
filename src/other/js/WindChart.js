@@ -31,23 +31,19 @@ function drawChart() {
 /* Table functions */
 
 
+
 /* Socket functions */
 
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 ws.onopen = function() {
-    alert("Opened!");
-    ws.send("Hello Server");
+    ws.send("GET XYZ");
 };
 
 ws.onmessage = function (evt) {
     var data = evt.data();
 };
 
-ws.onclose = function() {
-};
-
-ws.onerror = function(err) {
-
-};
+ws.onclose = function() {};
+ws.onerror = function(err) {};
 

@@ -8,10 +8,8 @@
 
 require_once 'includes/init.php';
 
-if(!$user->isLoggedIn()) {
-    header("Location: login.php");
-}
-
+$requiresLogin = true;
+$userLevel = 1;
 $title = "Temperature";
 
 ?>
