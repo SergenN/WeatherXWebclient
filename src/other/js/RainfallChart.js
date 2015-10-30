@@ -2,7 +2,9 @@
  * Created by Sergen on 28-10-2015.
  */
 
-google.load('visualization', '1.1', {packages: ['line', 'corechart']});
+/* Chart functions */
+
+google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(drawChart);
 
 function drawChart() {
@@ -25,84 +27,72 @@ function drawChart() {
     chart.draw(data, options);
 }
 
+/* Table functions */
+google.load("visualization", "1", {packages:["map"]});
+google.setOnLoadCallback(drawMap);
 
-google.setOnLoadCallback(drawTable);
-
-function drawTable() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Country');
-    data.addColumn('number', 'Average rainfall');
-    data.addRows([
-        ['Nether-lands',  {v: 200, f: '200mm'}],
-        ['North Korea',   {v:-50,   f: '-50mm (cuz of kim)'}],
-        ['Deutsche Reich!', {v: 150, f: '150mm'}],
-        ['China (Town)',   {v: 75,  f: '75mm'}]
+function drawMap() {
+    var data = google.visualization.arrayToDataTable([
+        ['Lat', 'Long', 'Name'],
+        [37.4232, -122.0853, 'Work'],
+        [37.4289, -122.1697, 'University'],
+        [37.6153, -122.3900, 'Airport'],
+        [37.4422, -122.1731, 'Shopping']
     ]);
 
-    var table = new google.visualization.Table(document.getElementById('table_div'));
-
-    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    var map = new google.visualization.Map(document.getElementById('map_div'));
+    map.draw(data, {showTip: true});
 }
 
-/*
-google.load('visualization', '1.1', {packages: ['line', 'corechart']});
-google.setOnLoadCallback(drawChart);
 
-function drawChart() {
+/* Socket functions */
 
-    var button = document.getElementById('change-chart');
-    var chartDiv = document.getElementById('chart_div');
+var socket = new WebSocket("ws://127.0.0.1:8080/");
 
-    var data = new google.visualization.DataTable();
-    data.addColumn('date', 'Month');
-    data.addColumn('number', "Average Temperature");
+ws.onopen = function() {
+    alert("Opened!");
+    ws.send("Hello Server");
+};
 
-    data.addRows([
-        [new Date(2014, 0),  -.5],
-        [new Date(2014, 1),   .4],
-        [new Date(2014, 2),   .5],
-        [new Date(2014, 3),  2.9],
-        [new Date(2014, 4),  6.3],
-        [new Date(2014, 5),    9],
-        [new Date(2014, 6), 10.6],
-        [new Date(2014, 7), 10.3],
-        [new Date(2014, 8),  7.4],
-        [new Date(2014, 9),  4.4],
-        [new Date(2014, 10), 1.1],
-        [new Date(2014, 11), -.2]
-    ]);
+ws.onmessage = function (evt) {
+    var data = evt.data();
+};
 
-    var classicOptions = {
-        title: 'Average Temperatures and Daylight in Iceland Throughout the Year',
-        width: 900,
-        height: 500,
-        // Gives each series an axis that matches the vAxes number below.
-        series: {
-            0: {targetAxisIndex: 0}
-        },
-        vAxes: {
-            // Adds titles to each axis.
-            0: {title: 'Temperature (Celsius)'}
-        },
-        hAxis: {
-            ticks: [new Date(2014, 0), new Date(2014, 1), new Date(2014, 2), new Date(2014, 3),
-                new Date(2014, 4),  new Date(2014, 5), new Date(2014, 6), new Date(2014, 7),
-                new Date(2014, 8), new Date(2014, 9), new Date(2014, 10), new Date(2014, 11)
-            ]
-        },
-        vAxis: {
-            viewWindow: {
-                max: 30
-            }
+ws.onclose = function() {
+};
+
+ws.onerror = function(err) {
+
+};
+
+function updateRow(dataRow) {
+
+    var table = $('#events-table');
+    var found = false;
+
+    jQuery.each(table.bootstrapTable('getData'), function (index, value) {
+        if (value.country == dataRow.country) {
+            found = true;
+            $table.bootstrapTable('updateRow', {
+                index: value.id,
+                row: {
+                    data1: '',
+                    data2: ''
+                }
+            });
         }
-    };
+    });
 
-    function drawClassicChart() {
-        var classicChart = new google.visualization.LineChart(chartDiv);
-        classicChart.draw(data, classicOptions);
-        button.innerText = 'Change to Material';
-        button.onclick = drawMaterialChart;
+    if (!found) {
+        addRow(dataRow);
     }
+}
 
-    drawClassicChart();
-}*/
+function addRow(dataRow){
+    table.bootstrapTable('append', {
+        row: {
+            data1: '',
+            data2: ''
+        }
+    });
+}

@@ -2,11 +2,9 @@
  * Created by Sergen on 29-10-2015.
  */
 
-/**
- * Created by Sergen on 28-10-2015.
- */
+/* chart functions */
 
-google.load('visualization', '1.1', {packages: ['line', 'corechart']});
+google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(drawChart);
 
 function drawChart() {
@@ -30,20 +28,26 @@ function drawChart() {
 }
 
 
-google.setOnLoadCallback(drawTable);
+/* Table functions */
 
-function drawTable() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Country');
-    data.addColumn('number', 'Average wind speed');
-    data.addRows([
-        ['Nether-lands',  {v: 200, f: '200mm'}],
-        ['North Korea',   {v:-50,   f: '-50mm (cuz of kim)'}],
-        ['Deutsche Reich!', {v: 150, f: '150mm'}],
-        ['China (Town)',   {v: 75,  f: '75mm'}]
-    ]);
 
-    var table = new google.visualization.Table(document.getElementById('table_div'));
+/* Socket functions */
 
-    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-}
+var socket = new WebSocket("ws://127.0.0.1:8080/");
+
+ws.onopen = function() {
+    alert("Opened!");
+    ws.send("Hello Server");
+};
+
+ws.onmessage = function (evt) {
+    var data = evt.data();
+};
+
+ws.onclose = function() {
+};
+
+ws.onerror = function(err) {
+
+};
+
