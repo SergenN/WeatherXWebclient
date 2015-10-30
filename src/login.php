@@ -16,6 +16,8 @@ if ($user->isLoggedIn()){
     header("Location: index.php");
 }
 
+$requiresLogin = false;
+$userLevel = 0;
 $title = "Login";
 
 ?>
