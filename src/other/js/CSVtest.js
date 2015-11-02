@@ -9,7 +9,7 @@ google.setOnLoadCallback(drawMap);
 // this has to be a global function
 function drawMap() {
     // grab the CSV
-    $.get("http://goldhill.nl/weatherx.csv", function (csvString) {
+    $.get("weatherx.csv", function (csvString) {
         // transform the CSV string into a 2-dimensional array
         var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
 
