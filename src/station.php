@@ -100,8 +100,5 @@ $title = "Station";
 </div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="other/js/TemperatureDewpChart.js"></script>
-    <script src="other/js/AirpressuresChart.js"></script>
-    <script src="other/js/PrecipitationSnowChart.js"></script>
-    <script src="other/js/VisibilityChart.js"></script>
+    <script src="other/js/StationChart.js"></script>
 <?php include_once 'includes/footer.php'; ?>
