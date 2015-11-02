@@ -25,7 +25,7 @@ $title = "Rainfall";
 
     <div class="row">
         <div class="col-md-6">
-            <h3>Average rainfall near the coastline per country</h3>
+            <h3>Average rainfall near the coastline per country</h3><br>
             <table data-toggle="table" id="events-table" data-url="data2.json" data-height="300" data-pagination="true" data-page-list="[5, 10, 20, 50, 100]">
                 <thead>
                 <tr>

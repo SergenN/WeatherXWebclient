@@ -78,13 +78,32 @@ $title = "Station";
 
     <div class="row">
         <div class="col-md-6">
-            <p>Hier kan een kaart komen.</p>
+            <h3>Temperature and Dew point</h3>
+            <div id="temp_dewp_div"></div>
         </div>
 
         <div class="col-md-6">
-            <p>Hier kan een kaart komen.</p>
+            <h3>Air pressures</h3>
+            <div id="airpress_div"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Precipitation and amount of snow</h3>
+            <div id="precipitation_div"></div>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Visibility</h3>
+            <div id="visib_div"></div>
         </div>
     </div>
 </div>
 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="other/js/TemperatureDewpChart.js"></script>
+    <script src="other/js/AirpressuresChart.js"></script>
+    <script src="other/js/PrecipitationSnowChart.js"></script>
+    <script src="other/js/VisibilityChart.js"></script>
 <?php include_once 'includes/footer.php'; ?>

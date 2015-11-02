@@ -20,13 +20,13 @@ $title = "Temperature";
     <div class="container">
 
         <div class="page-header">
-            <h1>Average temperatures in Japan and China</h1>
-            <h4>Below 10 &deg;C in the range of the center of South Korea</h4>
+            <h1>Average temperatures below 10 &deg;C in Japan and China</h1>
+            <h4>In a range of 5000 kilometer from the center of South Korea</h4>
         </div>
 
         <div class="row">
             <div class="col-md-6">
-                <h3>Averages</h3>
+                <h3>Averages</h3><br>
                 <table class="table">
                     <tr>
                         <td><strong>China</strong></td>

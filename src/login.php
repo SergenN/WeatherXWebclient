@@ -22,7 +22,7 @@ $title = "Login";
 <?php include_once 'includes/header.php'; ?>
     <div class="col-md-6 col-md-offset-3">
         <br>
-        <img src="other/img/logo.png" style="display: block; margin-left: auto; margin-right: auto">
+        <img src="other/img/logo.png" style="display: block; margin-left: auto; margin-right: auto;">
         <br>
 
         <p style="text-align: center">Welcome on WeatherX. Please login to access the weather data from our database.</p><br>
