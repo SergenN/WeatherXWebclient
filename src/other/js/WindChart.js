@@ -30,7 +30,37 @@ function drawChart() {
 
 /* Table functions */
 
+function updateRow(dataRow) {
 
+    var table = $('#events-table');
+    var found = false;
+
+    jQuery.each(table.bootstrapTable('getData'), function (index, value) {
+        if (value.country == dataRow.country) {
+            found = true;
+            $table.bootstrapTable('updateRow', {
+                index: value.id,
+                row: {
+                    data1: '',
+                    data2: ''
+                }
+            });
+        }
+    });
+
+    if (!found) {
+        addRow(dataRow);
+    }
+}
+
+function addRow(dataRow){
+    table.bootstrapTable('append', {
+        row: {
+            data1: '',
+            data2: ''
+        }
+    });
+}
 
 /* Socket functions */
 

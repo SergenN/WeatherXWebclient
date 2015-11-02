@@ -2,13 +2,17 @@
  * Created by Sergen on 28-10-2015.
  */
 
+var data;
+var options;
+var chart;
+
 /* Chart functions */
 
 google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(drawChart);
 
 function drawChart() {
-    var data = google.visualization.arrayToDataTable([
+    data = google.visualization.arrayToDataTable([
         ['Seconds', 'Rainfall'],
         ['1',  30],
         ['2',  31],
@@ -16,18 +20,18 @@ function drawChart() {
         ['4',  29]
     ]);
 
-    var options = {
+    options = {
         title: 'Average rainfall',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('curve_div'));
+    chart = new google.visualization.LineChart(document.getElementById('curve_div'));
 
     chart.draw(data, options);
 }
 
-/* Table functions */
+/* Map functions */
 google.load("visualization", "1", {packages:["map"]});
 google.setOnLoadCallback(drawMap);
 
@@ -44,26 +48,7 @@ function drawMap() {
     map.draw(data, {showTip: true});
 }
 
-
-/* Socket functions */
-
-var socket = new WebSocket("ws://127.0.0.1:8080/");
-
-ws.onopen = function() {
-    alert("Opened!");
-    ws.send("Hello Server");
-};
-
-ws.onmessage = function (evt) {
-    var data = evt.data();
-};
-
-ws.onclose = function() {
-};
-
-ws.onerror = function(err) {
-
-};
+/* Table options */
 
 function updateRow(dataRow) {
 
@@ -96,3 +81,19 @@ function addRow(dataRow){
         }
     });
 }
+
+/* Socket functions */
+
+var socket = new WebSocket("ws://127.0.0.1:8080/");
+
+ws.onopen = function() {
+    alert("Opened!");
+    ws.send("Hello Server");
+};
+
+ws.onmessage = function (evt) {
+    var data = evt.data();
+};
+
+ws.onclose = function() {};
+ws.onerror = function(err) {};

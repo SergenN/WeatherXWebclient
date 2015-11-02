@@ -48,7 +48,37 @@ function drawMap() {
 
 
 /* Table functions */
+function updateRow(dataRow) {
 
+    var table = $('#events-table');
+    var found = false;
+
+    jQuery.each(table.bootstrapTable('getData'), function (index, value) {
+        if (value.country == dataRow.country) {
+            found = true;
+            $table.bootstrapTable('updateRow', {
+                index: value.id,
+                row: {
+                    data1: '',
+                    data2: ''
+                }
+            });
+        }
+    });
+
+    if (!found) {
+        addRow(dataRow);
+    }
+}
+
+function addRow(dataRow){
+    table.bootstrapTable('append', {
+        row: {
+            data1: '',
+            data2: ''
+        }
+    });
+}
 
 /* Socket functions */
 
@@ -63,9 +93,5 @@ ws.onmessage = function (evt) {
     var data = evt.data();
 };
 
-ws.onclose = function() {
-};
-
-ws.onerror = function(err) {
-
-};
+ws.onclose = function() {};
+ws.onerror = function(err) {};

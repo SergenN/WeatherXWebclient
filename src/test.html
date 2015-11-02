@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compass tester</title>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript">
+        $.fn.animateRotate = function(angle, duration, easing, complete) {
+            var args = $.speed(duration, easing, complete);
+            var step = args.step;
+            return this.each(function(i, e) {
+                args.complete = $.proxy(args.complete, e);
+                args.step = function(now) {
+                    $.style(e, 'transform', 'rotate(' + now + 'deg)');
+                    if (step) return step.apply(e, arguments);
+                };
+                $({deg: 0}).animate({deg: angle}, args);
+            });
+        };
+    </script>
+
+</head>
+<body>
+
+<div style="background: url('other/img/compass.png') no-repeat; background-size: cover; width: 250px; height: 250px;">
+<div id="pointer" style="background: url('other/img/pointer.png') no-repeat center center; background-size: 18% 70%; width: 250px; height: 250px;">
+</div>
+</div>
+</body>
+
+<script>
+
+    function bounceAnimate(rot) {
+        rotExtra = rot+10;
+        rotatePointer(rotExtra, 600);
+        rotatePointer(rot, 150)
+    }
+
+    function rotatePointer(amount, time){
+        $('#pointer').animate({borderSpacing: amount}, {
+            step: function (now, fx) {
+                $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+                $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+                $(this).css('transform', 'rotate(' + now + 'deg)');
+                $(this).css('animation-timing-function', 'linear');
+            },
+            duration: time
+        });
+    }
+
+    bounceAnimate(360);
+
+/*        $("#pointer").animateRotate(90, {
+            duration: 700,
+            easing: 'linear',
+            complete: function () {
+            },
+            step: function () {
+            }
+        });*/
+
+</script>
+</html>
