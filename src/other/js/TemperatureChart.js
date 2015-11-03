@@ -30,22 +30,31 @@ function drawChart() {
 }
 
 /* Map functions */
-google.load("visualization", "1", {packages:["map"]});
-google.setOnLoadCallback(drawMap);
+google.load('visualization', '1', {packages: ['geochart']});
+google.setOnLoadCallback(drawRegionsMap);
 
-function drawMap() {
+function drawRegionsMap() {
     var data = google.visualization.arrayToDataTable([
-        ['Lat', 'Long', 'Name'],
-        [37.4232, -122.0853, 'Work'],
-        [37.4289, -122.1697, 'University'],
-        [37.6153, -122.3900, 'Airport'],
-        [37.4422, -122.1731, 'Shopping']
-    ]);
+        ['Country',   'Average temperature'],
+        ['Japan', 36], ['China', -8], ['North Korea', 6], ['South Korea', -24],
+        ['Taiwan', 12], ['Vietnam', -3], ['Laos', 3],
+        ['Thailand', 28], ['Mongolia', 15],
+        ['Myanmar', 4], ['Bangladesh', 35], ['Philippines', 12],
+        ['Malaysia', -12], ['Bhutan', 6],
+        ['Nepal', -3], ['Indonesia', 12],
+        ['Singapore', 26], ['Cambodia', 3]]);
 
-    var map = new google.visualization.Map(document.getElementById('map_div'));
-    map.draw(data, {showTip: true});
+    var options = {
+        region: '142', // Azie = 142
+        colorAxis: {colors: ['#e7fc00', '#F79F23', '#F52222']},
+        backgroundColor: '#c7c5c7',
+        datalessRegionColor: '#ffffff',
+        defaultColor: '#ffffff'
+    };
+
+    var chart = new google.visualization.GeoChart(document.getElementById('map_div'));
+    chart.draw(data, options);
 }
-
 
 /* Table functions */
 function updateRow(dataRow) {
