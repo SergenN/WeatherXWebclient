@@ -140,27 +140,6 @@ $title = "Wind";
         </div>
     </div>
 
-    <script>
-        function bounceAnimate(rot) {
-            rotExtra = rot+10;
-            rotatePointer(rotExtra, 600);
-            rotatePointer(rot, 150)
-        }
-
-        function rotatePointer(amount, time){
-            $('#pointer').animate({borderSpacing: amount}, {
-                step: function (now, fx) {
-                    $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
-                    $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
-                    $(this).css('transform', 'rotate(' + now + 'deg)');
-                    $(this).css('animation-timing-function', 'linear');
-                },
-                duration: time
-            });
-        }
-        bounceAnimate(360);
-    </script>
-
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="other/js/WindChart.js"></script>
 
