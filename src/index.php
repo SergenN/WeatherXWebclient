@@ -15,5 +15,9 @@ $title = "Home";
 
 <?php include_once 'includes/header.php'; ?>
 <?php include_once 'includes/navbar.php'; ?>
-<iframe width="100%" height="535vh" frameBorder="0" src="http://umap.openstreetmap.fr/nl/map/untitled-map_56362?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&datalayersControl=true&onLoadPanel=undefined&captionBar=false"></iframe>
+
+<iframe id="map" width="100%" frameBorder="0" src="http://umap.openstreetmap.fr/nl/map/untitled-map_56362?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&datalayersControl=true&onLoadPanel=undefined&captionBar=false"></iframe>
+
+<script src="other/js/utils.js"></script>
+
 <?php include_once 'includes/footer.php'; ?>

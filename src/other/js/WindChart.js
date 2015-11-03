@@ -2,6 +2,25 @@
  * Created by Sergen on 29-10-2015.
  */
 
+/* compass functions */
+function bounceAnimate(rot) {
+    rotExtra = rot+10;
+    rotatePointer(rotExtra, 600);
+    rotatePointer(rot, 150)
+}
+
+function rotatePointer(amount, time){
+    $('#pointer').animate({borderSpacing: amount}, {
+        step: function (now, fx) {
+            $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+            $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+            $(this).css('transform', 'rotate(' + now + 'deg)');
+            $(this).css('animation-timing-function', 'linear');
+        },
+        duration: time
+    });
+}
+
 /* chart functions */
 
 google.load('visualization', '1', {packages: ['line', 'corechart']});
