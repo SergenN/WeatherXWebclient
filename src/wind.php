@@ -26,8 +26,9 @@ $title = "Wind";
             <div class="col-md-6">
                 <h3>Average wind direction</h3>
                 <div style="padding-top: 10px">
-                    <div style="background: url('other/img/compass.png') no-repeat; background-size: cover; width: 180px; height: 180px; margin-right: auto; margin-left: auto;">
-                    <div id="pointer" style="background: url('other/img/pointer.png') no-repeat center center; background-size: 18% 70%; width: 180px; height: 180px;"></div></div>
+                    <div id="compass">
+                        <div id="pointer"></div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
