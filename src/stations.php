@@ -35,7 +35,7 @@ $title = "Stations";
                     </tr>
                     </thead>
                     <?php
-
+                    /*
                     $query = "SELECT stn, name, country FROM stations";
                     $result = $connection->query($query);
 
@@ -51,6 +51,7 @@ $title = "Stations";
                     } else {
                         echo "0 results";
                     }
+                    */
                     ?>
                 </table>
             </div>
