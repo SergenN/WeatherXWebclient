@@ -35,11 +35,10 @@ $(document).ready(function(){
 
             (function(marker, key) {
                 google.maps.event.addListener(marker, 'click', function() {
-                    /*                    infowindow = new google.maps.InfoWindow({
-                     content: 'id: '+ marker.id
-                     });
-                     infowindow.open(map, marker);*/
-                    var win = window.open('http://localhost:63343/WeatherXWebclient/station.php?id='+marker.id, "_blank");
+                    var url = window.location.href;
+                    url = url.replace("index.php", "");
+                    url = url+"station.php?id="+marker.id;
+                    var win = window.open(url, "_blank");
                     win.focus();
                 });
             })(marker, key);
