@@ -25,51 +25,51 @@ $title = "Station " .  $id;
 
     <div class="row">
         <div class="col-md-6">
-            <table class="table">
+            <table id="dataTable" class="table">
                 <tr>
                     <td><strong>Temperature</strong></td>
-                    <td>21 degrees Celsius</td>
+                    <td data-field="TEMP">21 degrees Celsius</td>
                 </tr>
                 <tr>
                     <td><strong>Air pressure (station level)</strong></td>
-                    <td>1034,5 millibar</td>
+                    <td data-field="STP">1034,5 millibar</td>
                 </tr>
                 <tr>
                     <td><strong>Air pressure (sea level)</strong></td>
-                    <td>1007,5 millibar</td>
+                    <td data-field="SLP">1007,5 millibar</td>
                 </tr>
                 <tr>
                     <td><strong>Dew point</strong></td>
-                    <td>-40 degrees Celsius</td>
+                    <td data-field="DEWP">-40 degrees Celsius</td>
                 </tr>
                 <tr>
                     <td><strong>Visibility</strong></td>
-                    <td>123,7 kilometers</td>
+                    <td data-field="VISIB">123,7 kilometers</td>
                 </tr>
             </table>
         </div>
 
         <div class="col-md-6">
-            <table class="table">
+            <table id="dataTable2" class="table">
                 <tr>
                     <td><strong>Wind speed</strong></td>
-                    <td>10,8 km/h</td>
+                    <td data-field="WDSP">10,8 km/h</td>
                 </tr>
                 <tr>
                     <td><strong>Precipitation</strong></td>
-                    <td>11,28 centimeters</td>
+                    <td data-field="PRCP">11,28 centimeters</td>
                 </tr>
                 <tr>
                     <td><strong>Amount of snow</strong></td>
-                    <td>11,1 centimeters</td>
+                    <td data-field="SNDP">11,1 centimeters</td>
                 </tr>
                 <tr>
                     <td><strong>Cloudiness</strong></td>
-                    <td>87,4%</td>
+                    <td data-field="CLDC">87,4%</td>
                 </tr>
                 <tr>
                     <td><strong>Wind direction</strong></td>
-                    <td>West</td>
+                    <td data-field="WNDDIR">West</td>
                 </tr>
             </table>
         </div>

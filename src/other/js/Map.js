@@ -9,7 +9,6 @@ $(document).ready(function(){
     canvas.height(height - 60);
     canvas.width("100%");
 
-
     var gmarkers = [];
 
     var options = {
