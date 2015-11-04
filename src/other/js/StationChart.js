@@ -1,9 +1,6 @@
 /**
  * Created by Sergen on 29-10-2015.
  */
-
-
-
 /* chart functions */
 
 google.load('visualization', '1', {packages: ['line', 'corechart']});
@@ -99,3 +96,4 @@ function drawChart() {
     visibChart.draw(visibData, visibOptions);
 }
 
+/* Socket options */
