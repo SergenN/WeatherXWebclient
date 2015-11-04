@@ -2,38 +2,32 @@
  * Created by Sergen on 28-10-2015.
  */
 
-var data;
-var options;
-var chart;
-
+var rainfallChart, rainfallOptons, rainfallData, regionsChart, regionsOptions, regionsData;
 /* Chart functions */
-
 google.load('visualization', '1', {packages: ['line', 'corechart']});
-google.setOnLoadCallback(drawChart);
+google.setOnLoadCallback(initChart);
+
+function initChart(){
+    rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
+    rainfallOptons = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }};
+    rainfallData = new google.visualization.DataTable();
+
+    rainfallData.addColumn('number', 'Seconds');
+    rainfallData.addColumn('number','Average rainfall (mm)');
+    drawChart();
+}
 
 function drawChart() {
-    data = google.visualization.arrayToDataTable([
-        ['Seconds', 'Rainfall'],
-        ['1',  30],
-        ['2',  31],
-        ['3',  32],
-        ['4',  29]
-    ]);
-
-    options = {
-        title: 'Average rainfall',
-        curveType: 'function',
-        legend: { position: 'bottom' }
-    };
-
-    chart = new google.visualization.LineChart(document.getElementById('curve_div'));
-
-    chart.draw(data, options);
+    rainfallChart.draw(rainfallData, rainfallOptons);
 }
 
 /* Map functions */
 google.load('visualization', '1', {packages: ['geochart']});
 google.setOnLoadCallback(drawRegionsMap);
+
+function initRegions(){
+
+}
 
 function drawRegionsMap() {
     var data = google.visualization.arrayToDataTable([
@@ -96,14 +90,19 @@ function addRow(dataRow){
 
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
-ws.onopen = function() {
-    alert("Opened!");
-    ws.send("Hello Server");
+socket.onopen = function() {
+    socket.send("GET 890020");
 };
 
-ws.onmessage = function (evt) {
-    var data = evt.data();
+socket.onmessage = function (evt) {
+    var obj = jQuery.parseJSON(evt.data);
+    updateChart(obj);
 };
 
-ws.onclose = function() {};
-ws.onerror = function(err) {};
+socket.onclose = function() {};
+socket.onerror = function(err) {};
+
+function updateChart(jsonVar){
+    rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.PRCP)]);
+    drawChart();
+}

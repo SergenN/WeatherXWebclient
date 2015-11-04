@@ -2,11 +2,11 @@
  * Created by Sergen on 29-10-2015.
  */
 
+var windChart, windOptions, windData;
+
 /* compass functions */
 function bounceAnimate(rot) {
-    rotExtra = rot+10;
-    rotatePointer(rotExtra, 600);
-    rotatePointer(rot, 150)
+    rotatePointer(rot, 600)
 }
 
 function rotatePointer(amount, time){
@@ -24,26 +24,20 @@ function rotatePointer(amount, time){
 /* chart functions */
 
 google.load('visualization', '1', {packages: ['line', 'corechart']});
-google.setOnLoadCallback(drawChart);
+google.setOnLoadCallback(initChart);
+
+function initChart(){
+    windChart = new google.visualization.LineChart(document.getElementById('curve_div'));
+    windOptions = {title: 'Average wind speed', curveType: 'function', legend: { position: 'bottom' }};
+    windData = new google.visualization.DataTable();
+
+    windData.addColumn('number', 'Seconds');
+    windData.addColumn('number','Wind speed (km/h)');
+    drawChart();
+}
 
 function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Seconds', 'Wind speed'],
-        ['1',  30],
-        ['2',  31],
-        ['3',  32],
-        ['4',  29]
-    ]);
-
-    var options = {
-        title: 'Average wind speed',
-        curveType: 'function',
-        legend: { position: 'bottom' }
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById('curve_div'));
-
-    chart.draw(data, options);
+    windChart.draw(windData, windOptions);
 }
 
 
@@ -85,14 +79,20 @@ function addRow(dataRow){
 
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
-ws.onopen = function() {
-    ws.send("GET XYZ");
+socket.onopen = function() {
+    socket.send("GET 10620");
 };
 
-ws.onmessage = function (evt) {
-    var data = evt.data();
+socket.onmessage = function (evt) {
+    var obj = jQuery.parseJSON(evt.data);
+    updateCharts(obj);
 };
 
-ws.onclose = function() {};
-ws.onerror = function(err) {};
+socket.onclose = function() {};
+socket.onerror = function(err) {};
 
+function updateCharts(jsonVar){
+    bounceAnimate(parseFloat(jsonVar.WNDDIR));
+    windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.WDSP)]);
+    drawChart();
+}

@@ -30,26 +30,26 @@ require 'includes/station_processor.php';
 
     <div class="row">
         <div class="col-md-6">
-            <table id="dataTable" class="table">
+            <table class="table">
                 <tr>
                     <td><strong>Temperature</strong></td>
-                    <td data-field="TEMP">21 degrees Celsius</td>
+                    <td id="TEMP"></td>
                 </tr>
                 <tr>
                     <td><strong>Air pressure (station level)</strong></td>
-                    <td data-field="STP">1034,5 millibar</td>
+                    <td id="STP"></td>
                 </tr>
                 <tr>
                     <td><strong>Air pressure (sea level)</strong></td>
-                    <td data-field="SLP">1007,5 millibar</td>
+                    <td id="SLP"></td>
                 </tr>
                 <tr>
                     <td><strong>Dew point</strong></td>
-                    <td data-field="DEWP">-40 degrees Celsius</td>
+                    <td id="DEWP"></td>
                 </tr>
                 <tr>
                     <td><strong>Visibility</strong></td>
-                    <td data-field="VISIB">123,7 kilometers</td>
+                    <td id="VISIB"></td>
                 </tr>
             </table>
         </div>
@@ -58,23 +58,23 @@ require 'includes/station_processor.php';
             <table id="dataTable2" class="table">
                 <tr>
                     <td><strong>Wind speed</strong></td>
-                    <td data-field="WDSP">10,8 km/h</td>
+                    <td id="WDSP"></td>
                 </tr>
                 <tr>
                     <td><strong>Precipitation</strong></td>
-                    <td data-field="PRCP">11,28 centimeters</td>
+                    <td id="PRCP"></td>
                 </tr>
                 <tr>
                     <td><strong>Amount of snow</strong></td>
-                    <td data-field="SNDP">11,1 centimeters</td>
+                    <td id="SNDP"></td>
                 </tr>
                 <tr>
                     <td><strong>Cloudiness</strong></td>
-                    <td data-field="CLDC">87,4%</td>
+                    <td id="CLDC"></td>
                 </tr>
                 <tr>
                     <td><strong>Wind direction</strong></td>
-                    <td data-field="WNDDIR">West</td>
+                    <td id="WNDDIR"></td>
                 </tr>
             </table>
         </div>

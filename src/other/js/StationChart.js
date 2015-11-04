@@ -3,24 +3,47 @@
  */
 /* chart functions */
 
+var airPressureChart, airPressureData, airPressureOptions, precipitationChart, precipitationData, precipitationOptions,
+    dewPointChart,dewPointData,dewPointOptions,visibilityChart,visibilityData, visibilityOptions;
+
 google.load('visualization', '1', {packages: ['line', 'corechart']});
-google.setOnLoadCallback(drawChart);
+google.setOnLoadCallback(initChart);
 
-var airPressureChart = new google.visualization.LineChart(document.getElementById('visualization'));
-var airPressureData = google.visualization.arrayToDataTable([['Seconds', 'Sea level', 'Station level']]);
-var airPressureOptions = {title: 'Millibars', curveType: 'function', legend: { position: 'bottom' }};
+function initChart(){
+    airPressureChart = new google.visualization.LineChart(document.getElementById('airpress_div'));
+    airPressureOptions = {title: 'Millibars', curveType: 'function', legend: { position: 'bottom' }};
+    airPressureData = new google.visualization.DataTable();
 
-var precipitationChart = airPressureChart.clone();
-var precipitationData = google.visualization.arrayToDataTable([['Seconds', 'Amount of snow', 'Precipitation']]);
-var precipitationOptions = {title: 'Centimeters', curveType: 'function', legend: { position: 'bottom' }};
+    airPressureData.addColumn('number', 'Seconds');
+    airPressureData.addColumn('number','Sea level (millibar)');
+    airPressureData.addColumn('number','Station level (millibar)');
 
-var dewPointChart = airPressureChart.clone();
-var dewPointData = google.visualization.arrayToDataTable([['Seconds', 'Temperature', 'Dew point']]);
-var dewPointOptions = {title: 'Temperatures', curveType: 'function', legend: { position: 'bottom' }};
+    precipitationChart = new google.visualization.LineChart(document.getElementById('precipitation_div'));
+    precipitationOptions = {title: 'Centimeters', curveType: 'function', legend: { position: 'bottom' }};
+    precipitationData = new google.visualization.DataTable();
 
-var visibilityChart = airPressureChart.clone();
-var visibilityData = google.visualization.arrayToDataTable([['Seconds', 'Visibility']]);
-var visibilityOptions = {title: 'Kilometers', curveType: 'function', legend: { position: 'bottom' }};
+    precipitationData.addColumn('number', 'Seconds');
+    precipitationData.addColumn('number','Amount of snow (cm)');
+    precipitationData.addColumn('number','Precipitation (cm)');
+
+
+    dewPointChart = new google.visualization.LineChart(document.getElementById('temp_dewp_div'));
+    dewPointOptions = {title: 'Temperatures', curveType: 'function', legend: { position: 'bottom' }};
+    dewPointData = new google.visualization.DataTable();
+
+    dewPointData.addColumn('number', 'Seconds');
+    dewPointData.addColumn('number','Temperature (&deg;C)');
+    dewPointData.addColumn('number','Dew point (&deg;C)');
+
+    visibilityChart = new google.visualization.LineChart(document.getElementById('visib_div'));
+    visibilityOptions = {title: 'Kilometers', curveType: 'function', legend: { position: 'bottom' }};
+    visibilityData = new google.visualization.DataTable();
+
+    visibilityData.addColumn('number', 'Seconds');
+    visibilityData.addColumn('number','Visibility (km)');
+
+    drawChart();
+}
 
 function drawChart() {
     airPressureChart.draw(airPressureData, airPressureOptions);
@@ -32,25 +55,27 @@ function drawChart() {
 /* Socket options */
 
 var socket = new WebSocket("ws://127.0.0.1:8080/");
-var counter = 0;
-ws.onopen = function() {
-    ws.send("GET " + getUrlParameter("id"));
+socket.onopen = function() {
+    var cmd = "GET " + getUrlParameter("id");
+    socket.send(cmd);
 };
+var counter = 1;
 
-ws.onmessage = function (evt) {
-    var obj = jQuery.parseJSON(evt.data());
+socket.onmessage = function (evt) {
+    var obj = jQuery.parseJSON(evt.data);
     updateCharts(obj);
-    counter++;
-    if (counter == 0) {
+
+    if (counter == 1){
         updateTable(obj);
     }
-    if (counter == 10){
+    if (counter == 6){
         counter = 0;
     }
+    counter = counter + 1;
 };
 
-ws.onclose = function() {};
-ws.onerror = function(err) {};
+socket.onclose = function() {};
+socket.onerror = function(err) {};
 
 /*utils*/
 
@@ -70,24 +95,52 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function updateTable(jsonVar){
-    var table = $('#dataTable');
-    var table2 = $('#dataTable2');
-    table.bootstrapTable('updateRow', {index: 0, row: {TEMP:jsonVar.TEMP}});
-    table.bootstrapTable('updateRow', {index: 1, row: {STP:jsonVar.STP}});
-    table.bootstrapTable('updateRow', {index: 2, row: {SLP:jsonVar.SLP}});
-    table.bootstrapTable('updateRow', {index: 3, row: {DEWP:jsonVar.DEWP}});
-    table.bootstrapTable('updateRow', {index: 4, row: {VISIB:jsonVar.VISIB}});
-    table2.bootstrapTable('updateRow', {index: 0, row: {WDSP:jsonVar.WDSP}});
-    table2.bootstrapTable('updateRow', {index: 1, row: {PRCP:jsonVar.PRCP}});
-    table2.bootstrapTable('updateRow', {index: 2, row: {SNDP:jsonVar.SNDP}});
-    table2.bootstrapTable('updateRow', {index: 3, row: {CLDC:jsonVar.CLDC}});
-    table2.bootstrapTable('updateRow', {index: 4, row: {WNDDIR:jsonVar.WNDDIR}});
+    $("#TEMP").html(jsonVar.TEMP +"&deg;C");
+    $("#STP").html(jsonVar.STP +" mbar");
+    $("#SLP").html(jsonVar.SLP +" mbar");
+    $("#DEWP").html(jsonVar.DEWP +"&deg;C");
+    $("#VISIB").html(jsonVar.VISIB +" km");
+    $("#WDSP").html(jsonVar.WDSP +" km/h");
+    $("#PRCP").html(jsonVar.PRCP +" cm");
+    $("#SNDP").html(jsonVar.SNDP +" cm");
+    $("#CLDC").html(jsonVar.CLDC +"%");
+    $("#WNDDIR").html(degreesToText(jsonVar.WNDDIR));
 }
 
 function updateCharts(jsonVar){
-    airPressureData.addRow([airPressureData.getNumberOfRows(), jsonVar.SLP, jsonVar.STP]);
-    precipitationData.addRow([precipitationData.getNumberOfRows(), jsonVar.SNDP, jsonVar.PRCP]);
-    dewPointData.addRow([[dewPointData.getNumberOfRows(), jsonVar.TEMP, jsonVar.DEWP]]);
-    visibilityData.addRow([[visibilityData, jsonVar.VISIB]]);
+    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
+    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
+    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
+    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
     drawChart();
+}
+
+var degreesToText = function degreesToText(winddirection) {
+    if(winddirection >= 0 && winddirection <= 360) {
+        if ((winddirection > 337.5 && winddirection < 360) || (winddirection <= 22.5)) {
+            return "North";
+        }
+        if (winddirection > 22.5 && winddirection <= 67.5) {
+            return "Northeast";
+        }
+        if (winddirection > 67.5 && winddirection <= 112.5) {
+            return "East";
+        }
+        if (winddirection > 112.5 && winddirection <= 157.5) {
+            return "Southeast";
+        }
+        if (winddirection > 157.5 && winddirection <= 202.5) {
+            return "South";
+        }
+        if (winddirection > 202.5 && winddirection <= 247.5) {
+            return "Southwest";
+        }
+        if (winddirection > 247.5 && winddirection <= 292.5) {
+            return "West";
+        }
+        if (winddirection > 292.5 && winddirection <= 337.5) {
+            return "Northwest";
+        }
+    }
+    return "Unknown";
 }
