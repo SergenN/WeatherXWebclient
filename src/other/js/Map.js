@@ -9,7 +9,6 @@ $(document).ready(function(){
     canvas.height(height - 60);
     canvas.width("100%");
 
-
     var gmarkers = [];
 
     var options = {
@@ -24,6 +23,7 @@ $(document).ready(function(){
 
     $.getJSON( "other/data/stations.json", function( data ) {
         $.each( data, function( key, val ) {
+            key = val.stn;
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(val.latitude, val.longitude),
                 map: map,
