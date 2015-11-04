@@ -10,7 +10,8 @@ require_once 'includes/init.php';
 
 $requiresLogin = true;
 $userLevel = 1;
-$title = "Station";
+$id = $_GET['id'];
+$title = "Station " .  $id;
 
 ?>
 <?php include_once 'includes/header.php'; ?>
@@ -19,7 +20,7 @@ $title = "Station";
 
     <div class="page-header">
         <h1>De Bilt</h1>
-        <h4>62600 - The Netherlands</h4>
+        <h4><?php echo $id;?> - The Netherlands</h4>
     </div>
 
     <div class="row">
