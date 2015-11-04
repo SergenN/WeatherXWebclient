@@ -4,6 +4,9 @@
  * User: Leon
  * Date: 19-10-2015
  * Time: 16:26
+ *
+ * Note: this page contains data from a single station!
+ * This page differs from stations.php
  */
 
 require_once 'includes/init.php';
@@ -13,14 +16,16 @@ $userLevel = 1;
 $id = $_GET['id'];
 $title = "Station " .  $id;
 
+require 'includes/station_processor.php';
+
 ?>
 <?php include_once 'includes/header.php'; ?>
 <?php include_once 'includes/navbar.php'; ?>
 <div class="container">
 
     <div class="page-header">
-        <h1>De Bilt</h1>
-        <h4><?php echo $id;?> - The Netherlands</h4>
+        <h1><?php echo ucwords(strtolower($name)); ?></h1>
+        <h4><?php echo $id;?> - <?php echo ucwords(strtolower($country)); ?></h4>
     </div>
 
     <div class="row">
