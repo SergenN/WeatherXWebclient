@@ -6,54 +6,58 @@
  * Created by Sergen on 28-10-2015.
  */
 
+var temperatureChart, temperatureData, temperatureOptions, regionChart, regionData, regionOptions;
+
 google.load('visualization', '1', {packages: ['line', 'corechart']});
-google.setOnLoadCallback(drawChart);
+google.setOnLoadCallback(initChart);
+
+function initChart(){
+    temperatureChart = new google.visualization.LineChart(document.getElementById('curve_div'));
+    temperatureOptions = {title: 'Average temperature', curveType: 'function', legend: { position: 'bottom' }};
+    temperatureData = new google.visualization.DataTable();
+
+    temperatureData.addColumn('number', 'Seconds');
+    temperatureData.addColumn('number','Temperature C');
+    drawChart();
+}
 
 function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Seconds', 'Temperature'],
-        ['1',  30],
-        ['2',  31],
-        ['3',  32],
-        ['4',  29]
-    ]);
-
-    var options = {
-        title: 'Average temperatures',
-        curveType: 'function',
-        legend: { position: 'bottom' }
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById('curve_div'));
-
-    chart.draw(data, options);
+    temperatureChart.draw(temperatureData, temperatureOptions);
 }
 
 /* Map functions */
 google.load('visualization', '1', {packages: ['geochart']});
-google.setOnLoadCallback(drawRegionsMap);
+google.setOnLoadCallback(initRegionMap);
 
-function drawRegionsMap() {
-    var data = google.visualization.arrayToDataTable([
+function initRegionMap() {
+
+    regionChart = new google.visualization.GeoChart(document.getElementById('map_div'));
+
+    regionData = google.visualization.arrayToDataTable([
         ['Country',   'Average temperature'],
-        ['Japan', 36], ['China', -8], ['North Korea', 6], ['South Korea', -24],
-        ['Taiwan', 12], ['Vietnam', -3], ['Laos', 3],
-        ['Thailand', 28], ['Mongolia', 15],
-        ['Myanmar', 4], ['Bangladesh', 35], ['Philippines', 12],
-        ['Malaysia', -12], ['Bhutan', 6],
-        ['Nepal', -3], ['Indonesia', 12],
-        ['Singapore', 26], ['Cambodia', 3]]);
+        ['China', 20],
+        ['Honkong', 10],
+        ['Japan', 30],
+        ['North korea', 20],
+        ['South korea', 20],
+        ['Mongolia', 20],
+        ['Macao', 10],
+        ['taiwan', 50]
+    ]);
 
-    var options = {
-        region: '142', // Azie = 142
+    regionOptions = {
+        region: '030', // Azie = 142
         colorAxis: {colors: ['#e7fc00', '#F79F23', '#F52222']},
         backgroundColor: '#c7c5c7',
         datalessRegionColor: '#ffffff',
         defaultColor: '#ffffff'
     };
 
-    var chart = new google.visualization.GeoChart(document.getElementById('map_div'));
-    chart.draw(data, options);
+    drawMap();
+}
+
+function drawMap(){
+    regionChart.draw(regionData, regionOptions);
 }
 
 /* Table functions */
@@ -93,14 +97,22 @@ function addRow(dataRow){
 
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
-ws.onopen = function() {
-    alert("Opened!");
-    ws.send("Hello Server");
+socket.onopen = function() {
+    socket.send("GET 10620");
 };
 
-ws.onmessage = function (evt) {
-    var data = evt.data();
+socket.onmessage = function (evt) {
+    var obj = jQuery.parseJSON(evt.data);
+    updateCharts(obj);
 };
 
-ws.onclose = function() {};
-ws.onerror = function(err) {};
+socket.onclose = function() {};
+socket.onerror = function(err) {};
+
+function updateCharts(jsonVar){
+    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
+    drawChart();
+}
+
+//maak een array dat ID linkt aan regionmapnr
+//krijg region map NR -> match

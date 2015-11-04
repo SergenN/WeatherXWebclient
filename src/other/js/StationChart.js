@@ -65,7 +65,6 @@ socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
     updateCharts(obj);
 
-    alert(counter);
     if (counter == 1){
         updateTable(obj);
     }
@@ -109,8 +108,6 @@ function updateTable(jsonVar){
 }
 
 function updateCharts(jsonVar){
-    myVal1 = parseFloat($.trim());
-    myVal2 = parseFloat($.trim())
     airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
     precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
     dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);

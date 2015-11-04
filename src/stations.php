@@ -28,14 +28,14 @@ $title = "Stations";
 
                 <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                     <thead>
-                    <tr>
-                        <th data-field="stn" data-sortable="true">Station number</th>
-                        <th data-field="name" data-sortable="true">Station name</th>
-                        <th data-field="country" data-sortable="true">Country</th>
-                    </tr>
+                        <tr>
+                            <th data-field="stn" data-sortable="true">Station number</th>
+                            <th data-field="name" data-sortable="true">Station name</th>
+                            <th data-field="country" data-sortable="true">Country</th>
+                        </tr>
                     </thead>
                     <?php
-
+/*
                     $query = "SELECT stn, name, country FROM stations";
                     $result = $connection->query($query);
 
@@ -51,7 +51,7 @@ $title = "Stations";
                     } else {
                         echo "0 results";
                     }
-
+*/
                     ?>
                 </table>
             </div>
