@@ -17,7 +17,7 @@ function initChart(){
     temperatureData = new google.visualization.DataTable();
 
     temperatureData.addColumn('number', 'Seconds');
-    temperatureData.addColumn('number','Temperature C');
+    temperatureData.addColumn('number','Temperature in degrees Celsius');
     drawChart();
 }
 
@@ -60,6 +60,7 @@ function drawMap(){
     regionChart.draw(regionData, regionOptions);
 }
 
+
 /* Table functions */
 function updateRow(dataRow) {
 
@@ -69,12 +70,10 @@ function updateRow(dataRow) {
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
         if (value.country == dataRow.country) {
             found = true;
-            $table.bootstrapTable('updateRow', {
-                index: value.id,
-                row: {
-                    data1: '',
-                    data2: ''
-                }
+            table.bootstrapTable('updateCell', {
+                index: index,
+                field: 'temperature',
+                value: dataRow.temp
             });
         }
     });
@@ -85,12 +84,16 @@ function updateRow(dataRow) {
 }
 
 function addRow(dataRow){
-    table.bootstrapTable('append', {
-        row: {
-            data1: '',
-            data2: ''
-        }
+    row = [];
+    row.push({
+        name: dataRow.name,
+        country:dataRow.country,
+        temperature: dataRow.temp
     });
+
+    var table = $('#events-table');
+    table.bootstrapTable('append', row);
+
 }
 
 /* Socket functions */
@@ -100,10 +103,16 @@ var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
     socket.send("GET 10620");
 };
-
+var y = 0;
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
     updateCharts(obj);
+
+    var txt = '{"name":"De Bilt","country":"China","temp":'+ y + '}';
+    y++;
+    console.log(y);
+    var jsonObject = JSON.parse(txt);
+    updateTable(jsonObject);
 };
 
 socket.onclose = function() {};
@@ -112,6 +121,10 @@ socket.onerror = function(err) {};
 function updateCharts(jsonVar){
     temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
     drawChart();
+}
+
+function updateTable(jsonVar) {
+    updateRow(jsonVar);
 }
 
 //maak een array dat ID linkt aan regionmapnr

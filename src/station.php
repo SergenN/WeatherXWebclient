@@ -13,10 +13,14 @@ require_once 'includes/init.php';
 
 $requiresLogin = true;
 $userLevel = 1;
-$id = $_GET['id'];
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    $id = 10010;
+}
 $title = "Station " .  $id;
 
-require 'includes/station_processor.php';
+require 'includes/stationProcessor.php';
 
 ?>
 <?php include_once 'includes/header.php'; ?>
@@ -103,6 +107,7 @@ require 'includes/station_processor.php';
             <div id="visib_div"></div>
         </div>
     </div>
+
 </div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>

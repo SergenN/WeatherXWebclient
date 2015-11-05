@@ -53,79 +53,14 @@ $title = "Temperature";
         <div class="row">
             <div class="col-md-6">
                 <h3>Summary</h3>
-                <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+                <table data-toggle="table" id="events-table" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                     <thead>
                     <tr>
-                        <th data-field="stn" data-sortable="true">Station</th>
+                        <th data-field="name" data-sortable="true">Station</th>
                         <th data-field="country" data-sortable="true">Country</th>
-                        <th data-field="wdsp" data-sortable="true">Temperature</th>
+                        <th data-field="temperature" data-sortable="true">Temperature</th>
                     </tr>
                     </thead>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>8 &deg;C</td>
-                    </tr>
                 </table>
 
             </div>

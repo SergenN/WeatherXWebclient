@@ -41,7 +41,7 @@ function drawRegionsMap() {
         ['Singapore', 26], ['Cambodia', 3]]);
 
     var options = {
-        region: '142', // Azie = 142
+        region: '030', // Azie = 142
         colorAxis: {colors: ['#B2BBCF', '#7287B5', '#225FE3']},
         backgroundColor: '#c7c5c7',
         datalessRegionColor: '#ffffff',
