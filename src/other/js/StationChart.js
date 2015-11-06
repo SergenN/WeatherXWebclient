@@ -115,7 +115,7 @@ function updateCharts(jsonVar){
     drawChart();
 }
 
-var degreesToText = function degreesToText(winddirection) {
+function degreesToText(winddirection) {
     if(winddirection >= 0 && winddirection <= 360) {
         if ((winddirection > 337.5 && winddirection < 360) || (winddirection <= 22.5)) {
             return "North";

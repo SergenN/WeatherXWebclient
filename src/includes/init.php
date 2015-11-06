@@ -9,7 +9,7 @@
 session_start();
 
 spl_autoload_register(function($class){
-    require_once $class . '.php';
+    require_once  $_SERVER['DOCUMENT_ROOT'] .'/' . $class . '.php';
 });
 
 $connection = new \classes\SQLConnection("localhost", "root", "", "weatherxweb");

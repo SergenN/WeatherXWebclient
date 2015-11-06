@@ -62,8 +62,7 @@ function drawMap(){
 
 
 /* Table functions */
-function updateRow(dataRow) {
-
+function updateTable(dataRow) {
     var table = $('#events-table');
     var found = false;
 
@@ -93,7 +92,6 @@ function addRow(dataRow){
 
     var table = $('#events-table');
     table.bootstrapTable('append', row);
-
 }
 
 /* Socket functions */
@@ -110,7 +108,6 @@ socket.onmessage = function (evt) {
 
     var txt = '{"name":"De Bilt","country":"China","temp":'+ y + '}';
     y++;
-    console.log(y);
     var jsonObject = JSON.parse(txt);
     updateTable(jsonObject);
 };
@@ -121,10 +118,6 @@ socket.onerror = function(err) {};
 function updateCharts(jsonVar){
     temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
     drawChart();
-}
-
-function updateTable(jsonVar) {
-    updateRow(jsonVar);
 }
 
 //maak een array dat ID linkt aan regionmapnr

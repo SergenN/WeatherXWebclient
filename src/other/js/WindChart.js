@@ -5,7 +5,7 @@
 var windChart, windOptions, windData;
 
 /* compass functions */
-function bounceAnimate(rot) {
+function animateCompass(rot) {
     rotatePointer(rot, 600)
 }
 
@@ -43,20 +43,22 @@ function drawChart() {
 
 /* Table functions */
 
-function updateRow(dataRow) {
-
+function updateTable(dataRow) {
     var table = $('#events-table');
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.country) {
+        if (value.stn == dataRow.stn) {
             found = true;
-            $table.bootstrapTable('updateRow', {
-                index: value.id,
-                row: {
-                    data1: '',
-                    data2: ''
-                }
+            table.bootstrapTable('updateCell', {
+                index: index,
+                field: 'wdsp',
+                value: dataRow.wdsp
+            });
+            table.bootstrapTable('updateCell', {
+                index: index,
+                field: 'wnddir',
+                value: dataRow.wnddir
             });
         }
     });
@@ -67,12 +69,15 @@ function updateRow(dataRow) {
 }
 
 function addRow(dataRow){
-    table.bootstrapTable('append', {
-        row: {
-            data1: '',
-            data2: ''
-        }
+    row = [];
+    row.push({
+        stn: dataRow.name,
+        country: dataRow.country,
+        wdsp: dataRow.wdsp,
+        wnddir: degreesToText(dataRow.wnddir)
     });
+
+    $('#events-table').bootstrapTable('append', row);
 }
 
 /* Socket functions */
@@ -85,14 +90,47 @@ socket.onopen = function() {
 
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
+    animateCompass(parseFloat(jsonVar.WNDDIR));
     updateCharts(obj);
+    updateTable(obj);
 };
 
 socket.onclose = function() {};
 socket.onerror = function(err) {};
 
+/* updateTable */
+
 function updateCharts(jsonVar){
-    bounceAnimate(parseFloat(jsonVar.WNDDIR));
     windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.WDSP)]);
     drawChart();
+}
+
+function degreesToText(winddirection) {
+    if(winddirection >= 0 && winddirection <= 360) {
+        if ((winddirection > 337.5 && winddirection < 360) || (winddirection <= 22.5)) {
+            return "North";
+        }
+        if (winddirection > 22.5 && winddirection <= 67.5) {
+            return "Northeast";
+        }
+        if (winddirection > 67.5 && winddirection <= 112.5) {
+            return "East";
+        }
+        if (winddirection > 112.5 && winddirection <= 157.5) {
+            return "Southeast";
+        }
+        if (winddirection > 157.5 && winddirection <= 202.5) {
+            return "South";
+        }
+        if (winddirection > 202.5 && winddirection <= 247.5) {
+            return "Southwest";
+        }
+        if (winddirection > 247.5 && winddirection <= 292.5) {
+            return "West";
+        }
+        if (winddirection > 292.5 && winddirection <= 337.5) {
+            return "Northwest";
+        }
+    }
+    return "Unknown";
 }

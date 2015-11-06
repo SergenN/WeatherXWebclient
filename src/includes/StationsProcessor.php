@@ -6,21 +6,15 @@
  * Time: 21:12
  */
 
-spl_autoload_register(function($class){
-    require_once $class . '.php';
-});
 
-$connection = new classes\SQLConnection("localhost", "root", "", "weatherxweb");
+include_once  $_SERVER['DOCUMENT_ROOT'] . '/includes/init.php';
 
 $query = "SELECT stn, name, country FROM stations;";
 $result = $connection->query($query);
-$resultSet[] = [];
 
 while($row = $result->fetch_assoc()) {
     $resultSet[] = $row;
+    var_dump($row);
 }
- var_dump($resultSet);
-die;
-
-echo json_encode($resultSet);
+//var_dump ($resultSet);
 ?>

@@ -42,7 +42,7 @@ $title = "Wind";
 
                 <h3>Summary</h3>
 
-                <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+                <table data-toggle="table" id="events-table" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                     <thead>
                         <tr>
                             <th data-field="stn" data-sortable="true">Station</th>
@@ -51,90 +51,6 @@ $title = "Wind";
                             <th data-field="wnddir" data-sortable="true">Wind direction</th>
                         </tr>
                     </thead>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>20 km/h</td>
-                        <td>Northwest</td>
-                    </tr>
-                    <tr>
-                        <td>Groningen Ap Eelde</td>
-                        <td>Netherlands</td>
-                        <td>17 km/h</td>
-                        <td>West</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
                 </table>
             </div>
         </div>

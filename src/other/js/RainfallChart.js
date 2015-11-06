@@ -2,14 +2,14 @@
  * Created by Sergen on 28-10-2015.
  */
 
-var rainfallChart, rainfallOptons, rainfallData, regionsChart, regionsOptions, regionsData;
+var rainfallChart, rainfallOptions, rainfallData, regionsChart, regionsOptions, regionsData;
 /* Chart functions */
 google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
 function initChart(){
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
-    rainfallOptons = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }};
+    rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }};
     rainfallData = new google.visualization.DataTable();
 
     rainfallData.addColumn('number', 'Seconds');
@@ -18,19 +18,15 @@ function initChart(){
 }
 
 function drawChart() {
-    rainfallChart.draw(rainfallData, rainfallOptons);
+    rainfallChart.draw(rainfallData, rainfallOptions);
 }
 
 /* Map functions */
 google.load('visualization', '1', {packages: ['geochart']});
-google.setOnLoadCallback(drawRegionsMap);
+google.setOnLoadCallback(initRegions);
 
 function initRegions(){
-
-}
-
-function drawRegionsMap() {
-    var data = google.visualization.arrayToDataTable([
+    regionsData = google.visualization.arrayToDataTable([
         ['Country',   'Average rainfall'],
         ['Japan', 36], ['China', -8], ['North Korea', 6], ['South Korea', -24],
         ['Taiwan', 12], ['Vietnam', -3], ['Laos', 3],
@@ -40,7 +36,7 @@ function drawRegionsMap() {
         ['Nepal', -3], ['Indonesia', 12],
         ['Singapore', 26], ['Cambodia', 3]]);
 
-    var options = {
+    regionsOptions = {
         region: '030', // Azie = 142
         colorAxis: {colors: ['#B2BBCF', '#7287B5', '#225FE3']},
         backgroundColor: '#c7c5c7',
@@ -48,42 +44,63 @@ function drawRegionsMap() {
         defaultColor: '#ffffff'
     };
 
-    var chart = new google.visualization.GeoChart(document.getElementById('map_div'));
-    chart.draw(data, options);
+    regionsChart = new google.visualization.GeoChart(document.getElementById('map_div'));
+    drawRegionsMap();
+}
+
+function drawRegionsMap() {
+    regionsChart.draw(regionsData, regionsOptions);
 }
 
 /* Table options */
 
-function updateRow(dataRow) {
+function updateTable(dataRow, stn) {
 
-    var table = $('#events-table');
+    var table = stn ? $('#events-table-stations') : $('#events-table-countries');
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.country) {
+        if ((stn && value.stn == dataRow.stn) || (value.country == dataRow.country)) {
             found = true;
-            $table.bootstrapTable('updateRow', {
-                index: value.id,
-                row: {
-                    data1: '',
-                    data2: ''
-                }
+            table.bootstrapTable('updateCell', {
+                index: index,
+                field: 'prcp',
+                value: dataRow.prcp
+            });
+
+            table.bootstrapTable('updateCell', {
+                index: index,
+                field: 'sndp',
+                value: dataRow.sndp
             });
         }
     });
 
+
     if (!found) {
-        addRow(dataRow);
+        addRow(dataRow, stn);
     }
 }
 
-function addRow(dataRow){
-    table.bootstrapTable('append', {
-        row: {
-            data1: '',
-            data2: ''
-        }
-    });
+function addRow(dataRow, stn){
+    row = [];
+    if(stn){
+        row.push({
+            stn: dataRow.name,
+            country: dataRow.country,
+            prcp: dataRow.prcp,
+            sndp: dataRow.sndp
+        });
+    } else {
+        row.push({
+            country: dataRow.country,
+            prcp: dataRow.prcp,
+            sndp: dataRow.sndp
+        });
+    }
+
+    var table = stn ? $('#events-table-stations') : $('#events-table-countries');
+    table.bootstrapTable('append', row);
 }
 
 /* Socket functions */
@@ -97,6 +114,7 @@ socket.onopen = function() {
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
     updateChart(obj);
+    updateTable(obj, true);
 };
 
 socket.onclose = function() {};

@@ -24,37 +24,14 @@ $title = "Rainfall";
     <div class="row">
         <div class="col-md-6">
             <h3>Average rainfall near the coastline per country</h3><br>
-            <table data-toggle="table" id="events-table" data-url="data2.json" data-height="300" data-pagination="true" data-page-list="[5, 10, 20, 50, 100]">
+            <table data-toggle="table" id="events-table-countries" data-height="300" data-pagination="true" data-page-list="[5, 10, 20, 50, 100]">
                 <thead>
                 <tr>
                     <th data-field="country" data-sortable="true">Country</th>
-                    <th data-field="wdsp" data-sortable="true">Average rainfall</th>
+                    <th data-field="prcp" data-sortable="true">Average rainfall</th>
+                    <th data-field="sndp" data-sortable="true">Average snowfall</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td>China</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Japan</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Taiwan</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>South Korea</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Vietnam</td>
-                    <td>30 mm</td>
-                </tr>
-                <tr>
-                    <td>Philippines</td>
-                    <td>30 mm</td>
-                </tr>
             </table>
         </div>
         <div class="col-md-6">
@@ -67,84 +44,15 @@ $title = "Rainfall";
         <div class="col-md-6">
             <h3>Average rainfall per weather station</h3>
 
-            <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+            <table data-toggle="table" id="events-table-stations" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                 <thead>
                 <tr>
                     <th data-field="stn" data-sortable="true">Station</th>
                     <th data-field="country" data-sortable="true">Country</th>
-                    <th data-field="wdsp" data-sortable="true">Average rainfall</th>
+                    <th data-field="prcp" data-sortable="true">Rainfall</th>
+                    <th data-field="sndp" data-sortable="true">Snowfall</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
-                <tr>
-                    <td>De Bilt</td>
-                    <td>Netherlands</td>
-                    <td>20 km/h</td>
-                </tr>
             </table>
         </div>
         <div class="col-md-6">
