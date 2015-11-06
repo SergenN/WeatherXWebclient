@@ -8,8 +8,11 @@ google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
 function initChart(){
+
+    var rWidth = ($(document).width() / 100) * 35;
+    var rHeight = ($(document).height() / 100)  * 30;
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
-    rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }, width:650, height:300};
+    rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
     rainfallData = new google.visualization.DataTable();
 
     rainfallData.addColumn('number', 'Seconds');
