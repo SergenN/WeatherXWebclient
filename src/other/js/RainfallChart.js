@@ -9,7 +9,7 @@ google.setOnLoadCallback(initChart);
 
 function initChart(){
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
-    rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }};
+    rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }, width:650, height:300};
     rainfallData = new google.visualization.DataTable();
 
     rainfallData.addColumn('number', 'Seconds');

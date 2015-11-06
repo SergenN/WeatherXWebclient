@@ -34,8 +34,8 @@ $title = "Rainfall";
                 </thead>
             </table>
         </div>
-        <div class="col-md-6">
-            <h3>Average rainfall in the area</h3>
+        <div class="col-md-6" style="margin-left: -2vw;">
+            <h3 style="padding-left: 2vw;">Average rainfall in the area</h3>
             <div id="curve_div"></div>
         </div>
     </div>
@@ -54,9 +54,12 @@ $title = "Rainfall";
                 </tr>
                 </thead>
             </table>
+            <br />
+            <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download history"></form>
         </div>
         <div class="col-md-6">
             <h3>Map</h3>
+            <br /><br />
             <div id="map_div"></div>
         </div>
     </div>

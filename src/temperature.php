@@ -62,10 +62,12 @@ $title = "Temperature";
                     </tr>
                     </thead>
                 </table>
-
+                <br />
+                <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download history"></form>
             </div>
             <div class="col-md-6">
                 <h3>Map</h3>
+                <br />
                 <div id="map_div"></div>
             </div>
         </div>

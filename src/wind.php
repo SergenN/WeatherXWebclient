@@ -39,7 +39,6 @@ $title = "Wind";
 
         <div class="row">
             <div class="col-md-12">
-
                 <h3>Summary</h3>
 
                 <table data-toggle="table" id="events-table" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
@@ -52,6 +51,8 @@ $title = "Wind";
                         </tr>
                     </thead>
                 </table>
+                <br />
+                <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download history"></form>
             </div>
         </div>
     </div>
