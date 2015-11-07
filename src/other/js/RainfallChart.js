@@ -2,20 +2,20 @@
  * Created by Sergen on 28-10-2015.
  */
 
-var rainfallChart, rainfallOptions, rainfallData, regionsChart, regionsOptions, regionsData;
+var rainfallChart, rainfallOptions, rainfallData, regionsChart, regionsOptions, regionsData, countryData;
+
 /* Chart functions */
 google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
 function initChart(){
-
     var rWidth = ($(document).width() / 100) * 35;
     var rHeight = ($(document).height() / 100)  * 30;
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
     rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
     rainfallData = new google.visualization.DataTable();
 
-    rainfallData.addColumn('number', 'Seconds');
+    rainfallData.addColumn('number','Seconds');
     rainfallData.addColumn('number','Average rainfall (mm)');
     drawChart();
 }
@@ -24,20 +24,26 @@ function drawChart() {
     rainfallChart.draw(rainfallData, rainfallOptions);
 }
 
+function updateChart(jsonVar){
+    rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.PRCP)]);
+    drawChart();
+}
+
 /* Map functions */
 google.load('visualization', '1', {packages: ['geochart']});
 google.setOnLoadCallback(initRegions);
 
 function initRegions(){
-    regionsData = google.visualization.arrayToDataTable([
-        ['Country',   'Average rainfall'],
-        ['Japan', 36], ['China', -8], ['North Korea', 6], ['South Korea', -24],
-        ['Taiwan', 12], ['Vietnam', -3], ['Laos', 3],
-        ['Thailand', 28], ['Mongolia', 15],
-        ['Myanmar', 4], ['Bangladesh', 35], ['Philippines', 12],
-        ['Malaysia', -12], ['Bhutan', 6],
-        ['Nepal', -3], ['Indonesia', 12],
-        ['Singapore', 26], ['Cambodia', 3]]);
+    regionsData = new google.visualization.DataTable();
+    regionsData.addColumn('string', 'Country');
+    regionsData.addColumn('number', 'Temperature');
+
+    regionsData.addRow(['China', 0]);
+    regionsData.addRow(['Japan', 0]);
+    regionsData.addRow(['Mongolia', 0]);
+    regionsData.addRow(['North Korea', 0]);
+    regionsData.addRow(['South Korea', 0]);
+    regionsData.addRow(['Taiwan', 0]);
 
     regionsOptions = {
         region: '030', // Azie = 142
@@ -51,14 +57,21 @@ function initRegions(){
     drawRegionsMap();
 }
 
-function drawRegionsMap() {
+function drawRegionsMap(regionsData) {
     regionsChart.draw(regionsData, regionsOptions);
 }
 
+function updateMap(dataRow) {
+    for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
+        if (regionsData.getValue(y, 0) == dataRow.country) {
+            regionsData.setValue(y, 1, dataRow.prcp);
+            drawRegionsMap(regionsData);
+        }
+    }
+}
+
 /* Table options */
-
 function updateTable(dataRow, stn) {
-
     var table = stn ? $('#events-table-stations') : $('#events-table-countries');
     var found = false;
 
@@ -78,7 +91,6 @@ function updateTable(dataRow, stn) {
             });
         }
     });
-
 
     if (!found) {
         addRow(dataRow, stn);
@@ -107,23 +119,22 @@ function addRow(dataRow, stn){
 }
 
 /* Socket functions */
-
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
     socket.send("GET 890020");
 };
 
+var y = 1;
 socket.onmessage = function (evt) {
-    var obj = jQuery.parseJSON(evt.data);
+    var txt = '{"name":"De Bilt","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
+    y++;
+    var obj = jQuery.parseJSON(txt);
+    //var obj = jQuery.parseJSON(evt.data);
     updateChart(obj);
     updateTable(obj, true);
+    updateMap(obj);
 };
 
 socket.onclose = function() {};
 socket.onerror = function(err) {};
-
-function updateChart(jsonVar){
-    rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.PRCP)]);
-    drawChart();
-}

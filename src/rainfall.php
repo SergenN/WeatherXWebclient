@@ -29,7 +29,6 @@ $title = "Rainfall";
                 <tr>
                     <th data-field="country" data-sortable="true">Country</th>
                     <th data-field="prcp" data-sortable="true">Average rainfall</th>
-                    <th data-field="sndp" data-sortable="true">Average snowfall</th>
                 </tr>
                 </thead>
             </table>
@@ -42,7 +41,7 @@ $title = "Rainfall";
 
     <div class="row">
         <div class="col-md-6">
-            <h3>Average rainfall per weather station</h3>
+            <h3>Average precipitation per weather station</h3>
 
             <table data-toggle="table" id="events-table-stations" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                 <thead>

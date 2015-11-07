@@ -2611,7 +2611,7 @@
         'getOptions',
         'getSelections', 'getAllSelections', 'getData',
         'load', 'append', 'prepend', 'remove', 'removeAll',
-        'insertRow', 'updateRow', 'updateCell', 'updateByUniqueId', 'removeByUniqueId',
+        'insertRow', 'updateCountriesRow', 'updateCell', 'updateByUniqueId', 'removeByUniqueId',
         'getRowByUniqueId', 'showRow', 'hideRow', 'getRowsHidden',
         'mergeCells',
         'checkAll', 'uncheckAll',

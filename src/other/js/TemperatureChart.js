@@ -2,11 +2,7 @@
  * Created by Sergen on 29-10-2015.
  */
 
-/**
- * Created by Sergen on 28-10-2015.
- */
-
-var temperatureChart, temperatureData, temperatureOptions, regionChart, regionData, regionOptions;
+var temperatureChart, temperatureData, temperatureOptions, regionsChart, regionsData, regionsOptions;
 
 google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
@@ -25,41 +21,51 @@ function drawChart() {
     temperatureChart.draw(temperatureData, temperatureOptions);
 }
 
+function updateCharts(jsonVar){
+    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
+    drawChart();
+}
+
 /* Map functions */
 google.load('visualization', '1', {packages: ['geochart']});
-google.setOnLoadCallback(initRegionMap);
+google.setOnLoadCallback(initRegions);
 
-function initRegionMap() {
+function initRegions(){
+    regionsData = new google.visualization.DataTable();
+    regionsData.addColumn('string', 'Country');
+    regionsData.addColumn('number', 'Temperature');
 
-    regionChart = new google.visualization.GeoChart(document.getElementById('map_div'));
+    regionsData.addRow(['China', 0]);
+    regionsData.addRow(['Japan', 0]);
+    regionsData.addRow(['Mongolia', 0]);
+    regionsData.addRow(['North Korea', 0]);
+    regionsData.addRow(['South Korea', 0]);
+    regionsData.addRow(['Taiwan', 0]);
 
-    regionData = google.visualization.arrayToDataTable([
-        ['Country',   'Average temperature'],
-        ['China', 20],
-        ['Honkong', 10],
-        ['Japan', 30],
-        ['North korea', 20],
-        ['South korea', 20],
-        ['Mongolia', 20],
-        ['Macao', 10],
-        ['taiwan', 50]
-    ]);
-
-    regionOptions = {
-        region: '030', // Azie = 142
+    regionsOptions = {
+        region: '030', // Azie = 142, Oost-Azië = 030
         colorAxis: {colors: ['#e7fc00', '#F79F23', '#F52222']},
         backgroundColor: '#c7c5c7',
         datalessRegionColor: '#ffffff',
         defaultColor: '#ffffff'
     };
 
-    drawMap();
+    regionsChart = new google.visualization.GeoChart(document.getElementById('map_div'));
+    drawRegionsMap();
 }
 
-function drawMap(){
-    regionChart.draw(regionData, regionOptions);
+function drawRegionsMap(regionsData) {
+    regionsChart.draw(regionsData, regionsOptions);
 }
 
+function updateMap(dataRow) {
+    for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
+        if (regionsData.getValue(y, 0) == dataRow.country) {
+            regionsData.setValue(y, 1, dataRow.temp);
+        }
+        drawRegionsMap(regionsData);
+    }
+}
 
 /* Table functions */
 function updateTable(dataRow) {
@@ -95,7 +101,6 @@ function addRow(dataRow){
 }
 
 /* Socket functions */
-
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
@@ -106,19 +111,13 @@ socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
     updateCharts(obj);
 
+    // test for table
     var txt = '{"name":"De Bilt","country":"China","temp":'+ y + '}';
     y++;
     var jsonObject = JSON.parse(txt);
     updateTable(jsonObject);
+    updateMap(jsonObject)
 };
 
 socket.onclose = function() {};
 socket.onerror = function(err) {};
-
-function updateCharts(jsonVar){
-    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
-    drawChart();
-}
-
-//maak een array dat ID linkt aan regionmapnr
-//krijg region map NR -> match
