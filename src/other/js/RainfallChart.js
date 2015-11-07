@@ -125,7 +125,7 @@ socket.onopen = function() {
     socket.send("GET 890020");
 };
 
-var y = 1;
+var y = 0;
 socket.onmessage = function (evt) {
     var txt = '{"name":"De Bilt","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
     y++;

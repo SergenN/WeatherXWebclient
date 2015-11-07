@@ -17,3 +17,10 @@ body {
     width: 180px;
     height: 180px;
 }
+
+.btn-group{
+    bottom: 15px;
+    position: relative;
+    top: 25px;
+
+}

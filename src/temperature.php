@@ -18,8 +18,16 @@ $title = "Temperature";
     <div class="container">
 
         <div class="page-header">
-            <h1>Average temperatures below 10 &deg;C in Japan and China</h1>
-            <h4>In a range of 5000 kilometer from the center of South Korea</h4>
+            <div class="pull-left">
+                <h1>Average temperatures below 10 &deg;C in Japan and China</h1>
+                <h4>In a range of 5000 kilometer from the center of South Korea</h4>
+            </div>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download data"></form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
         <div class="row">
@@ -62,8 +70,7 @@ $title = "Temperature";
                     </tr>
                     </thead>
                 </table>
-                <br />
-                <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download history"></form>
+                <br>
             </div>
             <div class="col-md-6">
                 <h3>Map</h3>

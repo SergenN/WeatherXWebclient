@@ -17,9 +17,14 @@ $title = "Wind";
 <?php include_once 'includes/navbar.php'; ?>
 
     <div class="container">
-
         <div class="page-header">
-            <h1>Average wind speed and direction worldwide</h1>
+            <h1 class="pull-left">Average wind speed and direction worldwide</h1>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download data"></form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
         <div class="row">

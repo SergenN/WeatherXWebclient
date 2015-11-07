@@ -16,9 +16,14 @@ $title = "Rainfall";
 <?php include_once 'includes/navbar.php'; ?>
 
 <div class="container">
-
     <div class="page-header">
-        <h1>Rainfall in the Pacific and the coastline of Asia</h1>
+        <h1 class="pull-left">Rainfall in the Pacific and the coastline of Asia</h1>
+        <div class="pull-right">
+            <div class="btn-group">
+                <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download data"></form>
+            </div>
+        </div>
+      <div class="clearfix"></div>
     </div>
 
     <div class="row">
@@ -53,13 +58,12 @@ $title = "Rainfall";
                 </tr>
                 </thead>
             </table>
-            <br />
-            <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download history"></form>
         </div>
+
         <div class="col-md-6">
             <h3>Map</h3>
-            <br /><br />
-            <div id="map_div"></div>
+            <br>
+            <div id="map_div"></div><br>
         </div>
     </div>
 </div>
