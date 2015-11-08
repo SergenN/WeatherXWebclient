@@ -32,8 +32,8 @@ function initChart(){
     dewPointData = new google.visualization.DataTable();
 
     dewPointData.addColumn('number', 'Seconds');
-    dewPointData.addColumn('number','Temperature (&deg;C)');
-    dewPointData.addColumn('number','Dew point (&deg;C)');
+    dewPointData.addColumn('number','Temperature (degrees Celsius)');
+    dewPointData.addColumn('number','Dew point (degrees Celsius)');
 
     visibilityChart = new google.visualization.LineChart(document.getElementById('visib_div'));
     visibilityOptions = {title: 'Kilometers', curveType: 'function', legend: { position: 'bottom' }};

@@ -12,7 +12,7 @@ function initChart(){
     temperatureOptions = {title: 'Average temperature', curveType: 'function', legend: { position: 'bottom' }};
     temperatureData = new google.visualization.DataTable();
 
-    temperatureData.addColumn('number', 'Seconds');
+    temperatureData.addColumn('number','Seconds');
     temperatureData.addColumn('number','Temperature in degrees Celsius');
     drawChart();
 }

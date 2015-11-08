@@ -56,8 +56,7 @@ $title = "Wind";
                         </tr>
                     </thead>
                 </table>
-                <br />
-                <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download history"></form>
+                <br>
             </div>
         </div>
     </div>
