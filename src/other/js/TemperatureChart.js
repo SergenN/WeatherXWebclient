@@ -105,7 +105,8 @@ var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
     // alleen de gemiddelde temperatuur van Japan
-    socket.send("GET_COUNTRY JAPAN TEMP AVG");
+    //socket.send("GET_COUNTRY JAPAN TEMP AVG");
+    socket.send("GET 62600");
 };
 
 var y = 0;
