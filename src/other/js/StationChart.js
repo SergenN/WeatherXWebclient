@@ -52,15 +52,22 @@ function drawChart() {
     visibilityChart.draw(visibilityData, visibilityOptions);
 }
 
-/* Socket options */
+function updateCharts(jsonVar){
+    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
+    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
+    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
+    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
+    drawChart();
+}
 
+/* Socket options */
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
     var cmd = "GET " + getUrlParameter("id");
     socket.send(cmd);
 };
-var counter = 1;
 
+var counter = 1;
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
     updateCharts(obj);
@@ -77,8 +84,7 @@ socket.onmessage = function (evt) {
 socket.onclose = function() {};
 socket.onerror = function(err) {};
 
-/*utils*/
-
+/* Utils */
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -105,14 +111,6 @@ function updateTable(jsonVar){
     $("#SNDP").html(jsonVar.SNDP +" cm");
     $("#CLDC").html(jsonVar.CLDC +"%");
     $("#WNDDIR").html(degreesToText(jsonVar.WNDDIR));
-}
-
-function updateCharts(jsonVar){
-    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
-    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
-    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
-    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
-    drawChart();
 }
 
 function degreesToText(winddirection) {
