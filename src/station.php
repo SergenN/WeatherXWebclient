@@ -21,7 +21,7 @@ $title = "Station " .  $id;
 require_once 'includes/init.php';
 include_once 'includes/header.php';
 include_once 'includes/navbar.php';
-require 'includes/stationProcessor.php';
+require 'includes/StationProcessor.php';
 
 ?>
 <div class="container">

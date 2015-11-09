@@ -9,10 +9,10 @@ google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
 function initChart(){
-    var rWidth = ($(document).width() / 100) * 35;
+    var rWidth = ($(document).width() / 100) * 50;
     var rHeight = ($(document).height() / 100)  * 30;
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
-    rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
+    rainfallOptions = {title: 'Avrage rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
     rainfallData = new google.visualization.DataTable();
 
     rainfallData.addColumn('number','Seconds');
@@ -121,7 +121,35 @@ function addRow(dataRow, stn){
 /* Socket functions */
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
-    var cmd = "GET 990170";
+    socket.send("GET_COAST SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COAST STNUMBER,COUNTRY,SNDP,PRCP,TYPE RAW");
+    socket.send("GET_COUNTRY CHINA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY JAPAN COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY TAIWAN COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY FIJI COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY TUVALU COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY GUAM COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY KIRIBATI COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY INDONESIA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY BRUNEI COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY SINGAPORE COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY KIRIBATI COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY MARSHALL_ISLANDS COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY WAKE_ISLAND COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY MIDWAY_ISLANDS COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY JOHNSTON_ATOLL COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY NEW_CALEDONIA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY SOLOMON_ISLANDS COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY COOK_ISLANDS COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY FRENCH_POLYNESIA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY NORFOLK_ISLAND COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY CHRISTMAS_ISLAND COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY PALAU COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY FEDERATED_STATES_OF_MICRONESIA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY NORTHERN_MARIANA_ISLANDS COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY WALLIS_AND_FUTUNA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY PAPUA_NEW_GUINEA COUNTRY,SNDP,PRCP,TYPE AVG");
+    socket.send("GET_COUNTRY PHILIPPINES COUNTRY,SNDP,PRCP,TYPE AVG");
     socket.send(cmd);
 };
 

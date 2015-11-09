@@ -17,6 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a class="navbar-brand" href="index.php"><img style="margin-top: -25%;" alt="Brand" src="other/img/logo-mini.png" </a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">

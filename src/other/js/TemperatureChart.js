@@ -8,8 +8,10 @@ google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
 function initChart(){
+    var rWidth = ($(document).width() / 100) * 50;
+    var rHeight = ($(document).height() / 100)  * 30;
     temperatureChart = new google.visualization.LineChart(document.getElementById('curve_div'));
-    temperatureOptions = {title: 'Average temperature', curveType: 'function', legend: { position: 'bottom' }};
+    temperatureOptions = {title: 'Average temperature', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
     temperatureData = new google.visualization.DataTable();
 
     temperatureData.addColumn('number','Seconds');
@@ -104,9 +106,14 @@ function addRow(dataRow){
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
-    // alleen de gemiddelde temperatuur van Japan
-    //socket.send("GET_COUNTRY JAPAN TEMP AVG");
-    socket.send("GET 62600");
+    socket.send("GET_RAD 37,127.30,5000 TEMP AVG");
+    socket.send("GET_COUNTRY CHINA TEMP AVG");
+    socket.send("GET_COUNTRY JAPAN TEMP AVG");
+    socket.send("GET_RAD 37,127.30,5000 TEMP RAW");
+    socket.send("GET_COUNTRY TAIWAN TEMP AVG");
+    socket.send("GET_COUNTRY NORTH_KOREA TEMP AVG");
+    socket.send("GET_COUNTRY SOUTH_KOREA TEMP AVG");
+    socket.send("GET_COUNTRY MONGOLIA TEMP AVG");
 };
 /*var y = 0;*/
 socket.onmessage = function (evt) {

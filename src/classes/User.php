@@ -89,7 +89,7 @@ class User {
      */
     public function setPassword($newPass, $SQLConnection){
         $newPass = $SQLConnection->escapeString($newPass);
-        $result = $SQLConnection->query("UPDATE `users` SET `password`='".$newPass."' WHERE `id`='".$this->getId()."';");
+        $result = $SQLConnection->query("UPDATE `users` SET `password`='".$newPass."' WHERE `id`='".$SQLConnection->escapeString($this->getId())."';");
     }
 
     /**
@@ -97,15 +97,15 @@ class User {
      * @param SQLConnection $SQLConnection
      */
     public function setTheme($theme, $SQLConnection){
-        if ($theme){
+        if ($theme || $theme == 1){
             if ($this->getTheme() == "default"){
-                $SQLConnection->query("UPDATE `users` SET `theme`='green' WHERE `id`='".$this->getId()."';");
+                $SQLConnection->query("UPDATE `users` SET `theme`='green' WHERE `id`='".$SQLConnection->escapeString($this->getId())."';");
                 $this->userTheme = "green";
                 $this->save();
             }
         } else {
             if ($this->getTheme() != "default"){
-                $SQLConnection->query("UPDATE `users` SET `theme`='default' WHERE `id`='".$this->getId()."';");
+                $SQLConnection->query("UPDATE `users` SET `theme`='default' WHERE `id`='".$SQLConnection->escapeString($this->getId())."';");
                 $this->userTheme = "default";
                 $this->save();
             }

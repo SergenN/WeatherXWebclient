@@ -18,12 +18,13 @@ body {
     height: 180px;
 }
 
-.btn-group{
+
+.btn-custom{
     bottom: 15px;
     position: relative;
     top: 25px;
-
 }
+
 
 a, a:active, a:focus,
 button, button:focus, button:active,input,

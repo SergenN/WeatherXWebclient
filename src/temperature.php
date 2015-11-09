@@ -22,7 +22,7 @@ include_once 'includes/navbar.php';
                 <h4>In a range of 5000 kilometer from the center of South Korea</h4>
             </div>
             <div class="pull-right">
-                <div class="btn-group">
+                <div class="btn-custom">
                     <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download data"></form>
                 </div>
             </div>
