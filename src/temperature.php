@@ -73,7 +73,7 @@ include_once 'includes/navbar.php';
             </div>
             <div class="col-md-6">
                 <h3>Map</h3>
-                <br />
+                <br>
                 <div id="map_div"></div>
             </div>
         </div>

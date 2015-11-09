@@ -2,7 +2,7 @@
  * Created by Sergen on 28-10-2015.
  */
 
-var rainfallChart, rainfallOptions, rainfallData, regionsChart, regionsOptions, regionsData, countryData;
+var rainfallChart, rainfallOptions, rainfallData, regionsChart, regionsOptions, regionsData;
 
 /* Chart functions */
 google.load('visualization', '1', {packages: ['line', 'corechart']});
@@ -120,9 +120,9 @@ function addRow(dataRow, stn){
 
 /* Socket functions */
 var socket = new WebSocket("ws://127.0.0.1:8080/");
-
 socket.onopen = function() {
-    socket.send("GET 890020");
+    var cmd = "GET 990170";
+    socket.send(cmd);
 };
 
 /*var y = 0;*/

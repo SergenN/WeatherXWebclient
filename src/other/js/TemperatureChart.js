@@ -104,7 +104,9 @@ function addRow(dataRow){
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
-    socket.send("GET 10620");
+    // alleen de gemiddelde temperatuur van Japan
+    //socket.send("GET_COUNTRY JAPAN TEMP AVG");
+    socket.send("GET 62600");
 };
 /*var y = 0;*/
 socket.onmessage = function (evt) {
