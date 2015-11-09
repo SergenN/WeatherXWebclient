@@ -48,17 +48,17 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.stn == dataRow.stn) {
+        if (value.COUNTRY == dataRow.COUNTRY) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wdsp',
-                value: dataRow.wdsp
+                value: dataRow.WDSP
             });
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wnddir',
-                value: dataRow.wnddir
+                value: dataRow.WNDDIR
             });
         }
     });
@@ -71,10 +71,9 @@ function updateTable(dataRow) {
 function addRow(dataRow){
     row = [];
     row.push({
-        stn: dataRow.name,
-        country: dataRow.country,
-        wdsp: dataRow.wdsp,
-        wnddir: degreesToText(dataRow.wnddir)
+        country: dataRow.COUNTRY,
+        wdsp: dataRow.WDSP,
+        wnddir: degreesToText(dataRow.WNDDIR)
     });
 
     $('#events-table').bootstrapTable('append', row);

@@ -6,6 +6,10 @@
  * Time: 10:40
  */
 
+$requiresLogin = false;
+$userLevel = 0;
+$title = "Login";
+
 require_once 'includes/init.php';
 
 if (isset($_POST['submitLogin'])){
@@ -16,12 +20,9 @@ if ($user->isLoggedIn()){
     header("Location: index.php");
 }
 
-$requiresLogin = false;
-$userLevel = 0;
-$title = "Login";
+include_once 'includes/header.php';
 
 ?>
-<?php include_once 'includes/header.php'; ?>
     <div class="col-md-6 col-md-offset-3" style="margin-top: -30px;">
         <img class="img-responsive center-block" src="other/img/logo.png">
         <br>

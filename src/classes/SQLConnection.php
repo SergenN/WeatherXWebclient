@@ -9,7 +9,7 @@
 namespace classes;
 use mysqli;
 
-class SQLConnection {
+class SQLConnection{
 
     private $mysqlConn;
 
@@ -32,6 +32,10 @@ class SQLConnection {
 
     public function close(){
         $this->mysqlConn->close();
+    }
+
+    public function escapeString($string){
+        return $this->mysqlConn->real_escape_string($string);
     }
 
 }

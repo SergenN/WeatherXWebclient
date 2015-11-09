@@ -9,8 +9,6 @@
  * This page differs from stations.php
  */
 
-require_once 'includes/init.php';
-
 $requiresLogin = true;
 $userLevel = 1;
 if(isset($_GET['id'])) {
@@ -20,11 +18,12 @@ if(isset($_GET['id'])) {
 }
 $title = "Station " .  $id;
 
+require_once 'includes/init.php';
+include_once 'includes/header.php';
+include_once 'includes/navbar.php';
 require 'includes/stationProcessor.php';
 
 ?>
-<?php include_once 'includes/header.php'; ?>
-<?php include_once 'includes/navbar.php'; ?>
 <div class="container">
 
     <div class="page-header">

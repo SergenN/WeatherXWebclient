@@ -6,15 +6,14 @@
  * Time: 16:26
  */
 
-require_once 'includes/init.php';
-
 $requiresLogin = true;
 $userLevel = 1;
 $title = "Wind";
-?>
 
-<?php include_once 'includes/header.php'; ?>
-<?php include_once 'includes/navbar.php'; ?>
+require_once 'includes/init.php';
+include_once 'includes/header.php';
+include_once 'includes/navbar.php';
+?>
 
     <div class="container">
         <div class="page-header">
@@ -49,7 +48,6 @@ $title = "Wind";
                 <table data-toggle="table" id="events-table" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                     <thead>
                         <tr>
-                            <th data-field="stn" data-sortable="true">Station</th>
                             <th data-field="country" data-sortable="true">Country</th>
                             <th data-field="wdsp" data-sortable="true">Wind speed</th>
                             <th data-field="wnddir" data-sortable="true">Wind direction</th>

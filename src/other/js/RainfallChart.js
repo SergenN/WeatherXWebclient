@@ -57,15 +57,15 @@ function initRegions(){
     drawRegionsMap();
 }
 
-function drawRegionsMap(regionsData) {
+function drawRegionsMap() {
     regionsChart.draw(regionsData, regionsOptions);
 }
 
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.country) {
-            regionsData.setValue(y, 1, dataRow.prcp);
-            drawRegionsMap(regionsData);
+        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
+            regionsData.setValue(y, 1, dataRow.PRCP);
+            drawRegionsMap();
         }
     }
 }
@@ -76,18 +76,18 @@ function updateTable(dataRow, stn) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if ((stn && value.stn == dataRow.stn) || (value.country == dataRow.country)) {
+        if ((stn && value.stn == dataRow.STN) || (!stn && value.country == dataRow.COUNTRY)) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'prcp',
-                value: dataRow.prcp
+                value: dataRow.PRCP
             });
 
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'sndp',
-                value: dataRow.sndp
+                value: dataRow.SNDP
             });
         }
     });
@@ -101,16 +101,16 @@ function addRow(dataRow, stn){
     row = [];
     if(stn){
         row.push({
-            stn: dataRow.name,
-            country: dataRow.country,
-            prcp: dataRow.prcp,
-            sndp: dataRow.sndp
+            stn: dataRow.NAME,
+            country: dataRow.COUNTRY,
+            prcp: dataRow.PRCP,
+            sndp: dataRow.SNDP
         });
     } else {
         row.push({
-            country: dataRow.country,
-            prcp: dataRow.prcp,
-            sndp: dataRow.sndp
+            country: dataRow.COUNTRY,
+            prcp: dataRow.PRCP,
+            sndp: dataRow.SNDP
         });
     }
 
@@ -125,15 +125,18 @@ socket.onopen = function() {
     socket.send("GET 890020");
 };
 
-var y = 0;
+/*var y = 0;*/
 socket.onmessage = function (evt) {
-    var txt = '{"name":"De Bilt","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
-    y++;
+/*    var txt = '{"name":"De Bilt","type":"AVG","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
+    y++;*/
     var obj = jQuery.parseJSON(txt);
-    //var obj = jQuery.parseJSON(evt.data);
-    updateChart(obj);
-    updateTable(obj, true);
-    updateMap(obj);
+    if (obj.type == 'AVG') {
+        updateChart(obj);
+        updateMap(obj);
+        updateTable(obj, false);
+    } else {
+        updateTable(obj, true);
+    }
 };
 
 socket.onclose = function() {};

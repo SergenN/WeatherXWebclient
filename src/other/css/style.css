@@ -24,3 +24,15 @@ body {
     top: 25px;
 
 }
+
+a, a:active, a:focus,
+button, button:focus, button:active,input,
+.btn, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{
+    outline: none;
+    outline: 0;
+}
+
+input::-moz-focus-inner {
+    outline: none;
+    border: 0;
+}

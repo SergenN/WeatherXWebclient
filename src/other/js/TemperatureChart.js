@@ -54,16 +54,16 @@ function initRegions(){
     drawRegionsMap();
 }
 
-function drawRegionsMap(regionsData) {
+function drawRegionsMap() {
     regionsChart.draw(regionsData, regionsOptions);
 }
 
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.country) {
-            regionsData.setValue(y, 1, dataRow.temp);
+        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
+            regionsData.setValue(y, 1, dataRow.TEMP);
         }
-        drawRegionsMap(regionsData);
+        drawRegionsMap();
     }
 }
 
@@ -73,12 +73,12 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.country) {
+        if (value.country == dataRow.COUNTRY) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'temperature',
-                value: dataRow.temp
+                value: dataRow.TEMP
             });
         }
     });
@@ -91,9 +91,9 @@ function updateTable(dataRow) {
 function addRow(dataRow){
     row = [];
     row.push({
-        name: dataRow.name,
-        country:dataRow.country,
-        temperature: dataRow.temp
+        name: dataRow.NAME,
+        country:dataRow.COUNTRY,
+        temperature: dataRow.TEMP
     });
 
     var table = $('#events-table');
@@ -106,17 +106,21 @@ var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
     socket.send("GET 10620");
 };
-var y = 0;
+/*var y = 0;*/
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
-    updateCharts(obj);
 
     // test for table
-    var txt = '{"name":"De Bilt","country":"China","temp":'+ y + '}';
+/*    var txt = '{"name":"De Bilt","type":"RAW","country":"China","temp":'+ y + '}';
     y++;
-    var jsonObject = JSON.parse(txt);
-    updateTable(jsonObject);
-    updateMap(jsonObject)
+    var jsonObject = JSON.parse(txt);*/
+
+    if(obj.type == 'AVG') {
+        updateCharts(obj);
+        updateMap(obj);
+    } else {
+        updateTable(obj);
+    }
 };
 
 socket.onclose = function() {};

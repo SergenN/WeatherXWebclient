@@ -6,14 +6,14 @@
  * Time: 16:26
  */
 
-require_once 'includes/init.php';
-
 $requiresLogin = true;
 $userLevel = 1;
 $title = "Rainfall";
+
+require_once 'includes/init.php';
+include_once 'includes/header.php';
+include_once 'includes/navbar.php';
 ?>
-<?php include_once 'includes/header.php'; ?>
-<?php include_once 'includes/navbar.php'; ?>
 
 <div class="container">
     <div class="page-header">
@@ -34,6 +34,7 @@ $title = "Rainfall";
                 <tr>
                     <th data-field="country" data-sortable="true">Country</th>
                     <th data-field="prcp" data-sortable="true">Average rainfall</th>
+                    <th data-field="sndp" data-sortable="true">Average snowfall</th>
                 </tr>
                 </thead>
             </table>

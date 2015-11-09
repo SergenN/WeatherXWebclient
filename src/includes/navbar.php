@@ -27,10 +27,10 @@
                     <li <?php if ($title == "Stations") echo ('class="active"'); ?>><a href="stations.php"><span class="glyphicon glyphicon-record"></span>&nbsp;&nbsp;&nbsp;Stations</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
+                    <li><a href="user.php"><?php echo "Hello ". $user->getName() . "!"; ?></a></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;&nbsp;Log out</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </nav>
 </div>

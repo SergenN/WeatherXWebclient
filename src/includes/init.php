@@ -14,3 +14,11 @@ spl_autoload_register(function($class){
 
 $connection = new \classes\SQLConnection("localhost", "root", "", "weatherxweb");
 $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : new \classes\User();
+
+if ($requiresLogin && !$user->isLoggedIn()){
+    header("Location: login.php");
+}
+
+if ($userLevel > $user->getLevel()){
+
+}
