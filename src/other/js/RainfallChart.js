@@ -9,7 +9,7 @@ google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
 function initChart(){
-    var rWidth = ($(document).width() / 100) * 35;
+    var rWidth = ($(document).width() / 100) * 50;
     var rHeight = ($(document).height() / 100)  * 30;
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
     rainfallOptions = {title: 'Rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
@@ -98,7 +98,7 @@ function updateTable(dataRow, stn) {
 }
 
 function addRow(dataRow, stn){
-    var row = [];
+    row = [];
     if(stn){
         row.push({
             stn: dataRow.name,
@@ -108,7 +108,7 @@ function addRow(dataRow, stn){
         });
     } else {
         row.push({
-            country: dataRow.country,
+            country: dataRow.COUNTRY,
             prcp: dataRow.prcp,
             sndp: dataRow.sndp
         });

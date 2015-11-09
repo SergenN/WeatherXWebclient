@@ -25,7 +25,7 @@ include_once 'includes/header.php';
 ?>
     <div class="col-md-6 col-md-offset-3" style="margin-top: -30px;">
         <img class="img-responsive center-block" src="other/img/logo.png">
-        <br>
+        <br />
         <p style="text-align: center">Welcome on WeatherX. Please login to access the weather data from our database.</p><br>
 
         <form method="post" action="">

@@ -70,21 +70,21 @@ include_once 'includes/navbar.php';
                 <div id="oldPassDiv" class="form-group has-error has-feedback">
                     <label class="col-md-3 control-label" for="oldPass">Old password</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="oldPass" id="oldPass" aria-describedby="inputError2Status">
+                        <input type="password" class="form-control" name="oldPass" id="oldPass" aria-describedby="inputError2Status">
                         <span id="oldPassIco" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <div id="newPassDiv" class="form-group has-error has-feedback">
                     <label class="col-md-3 control-label" for="newPass">New password</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="newPass" id="newPass" aria-describedby="inputError2Status">
+                        <input type="password" class="form-control" name="newPass" id="newPass" aria-describedby="inputError2Status">
                         <span id="newPassIco" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <div id="newPassrDiv" class="form-group has-error has-feedback">
                     <label class="col-md-3 control-label" for="newPassr">New password repeated</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="newPassr" id="newPassr" aria-describedby="inputError2Status">
+                        <input type="password" class="form-control" name="newPassr" id="newPassr" aria-describedby="inputError2Status">
                         <span id="newPassrIco" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
