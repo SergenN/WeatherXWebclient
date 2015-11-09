@@ -15,5 +15,3 @@ if ($user->isLoggedIn()) {
     $user->logOut();
 }
 header("Location: login.php");
-
-?>

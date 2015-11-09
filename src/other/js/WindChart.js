@@ -11,7 +11,7 @@ function animateCompass(rot) {
 
 function rotatePointer(amount, time){
     $('#pointer').animate({borderSpacing: amount}, {
-        step: function (now, fx) {
+        step: function (now) {
             $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
             $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
             $(this).css('transform', 'rotate(' + now + 'deg)');
@@ -48,17 +48,17 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.COUNTRY == dataRow.COUNTRY) {
+        if (value.country == dataRow.country) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wdsp',
-                value: dataRow.WDSP
+                value: dataRow.wdsp
             });
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wnddir',
-                value: dataRow.WNDDIR
+                value: dataRow.wnddir
             });
         }
     });
@@ -69,11 +69,11 @@ function updateTable(dataRow) {
 }
 
 function addRow(dataRow){
-    row = [];
+    var row = [];
     row.push({
-        country: dataRow.COUNTRY,
-        wdsp: dataRow.WDSP,
-        wnddir: degreesToText(dataRow.WNDDIR)
+        country: dataRow.country,
+        wdsp: dataRow.wdsp,
+        wnddir: degreesToText(dataRow.wnddir)
     });
 
     $('#events-table').bootstrapTable('append', row);
@@ -89,7 +89,7 @@ socket.onopen = function() {
 
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
-    animateCompass(parseFloat(jsonVar.WNDDIR));
+    animateCompass(parseFloat(obj.wnddir));
     updateCharts(obj);
     updateTable(obj);
 };
@@ -100,7 +100,7 @@ socket.onerror = function(err) {};
 /* updateTable */
 
 function updateCharts(jsonVar){
-    windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.WDSP)]);
+    windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.wdsp)]);
     drawChart();
 }
 

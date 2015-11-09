@@ -25,7 +25,7 @@ function drawChart() {
 }
 
 function updateChart(jsonVar){
-    rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.PRCP)]);
+    rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.prcp)]);
     drawChart();
 }
 
@@ -63,8 +63,8 @@ function drawRegionsMap() {
 
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
-            regionsData.setValue(y, 1, dataRow.PRCP);
+        if (regionsData.getValue(y, 0) == dataRow.country) {
+            regionsData.setValue(y, 1, dataRow.prcp);
             drawRegionsMap();
         }
     }
@@ -76,18 +76,18 @@ function updateTable(dataRow, stn) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if ((stn && value.stn == dataRow.STN) || (!stn && value.country == dataRow.COUNTRY)) {
+        if ((stn && value.stn == dataRow.stn) || (!stn && value.country == dataRow.country)) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'prcp',
-                value: dataRow.PRCP
+                value: dataRow.prcp
             });
 
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'sndp',
-                value: dataRow.SNDP
+                value: dataRow.sndp
             });
         }
     });
@@ -101,16 +101,16 @@ function addRow(dataRow, stn){
     row = [];
     if(stn){
         row.push({
-            stn: dataRow.NAME,
-            country: dataRow.COUNTRY,
-            prcp: dataRow.PRCP,
-            sndp: dataRow.SNDP
+            stn: dataRow.name,
+            country: dataRow.country,
+            prcp: dataRow.prcp,
+            sndp: dataRow.sndp
         });
     } else {
         row.push({
             country: dataRow.COUNTRY,
-            prcp: dataRow.PRCP,
-            sndp: dataRow.SNDP
+            prcp: dataRow.prcp,
+            sndp: dataRow.sndp
         });
     }
 
@@ -157,7 +157,7 @@ socket.onopen = function() {
 socket.onmessage = function (evt) {
 /*    var txt = '{"name":"De Bilt","type":"AVG","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
     y++;*/
-    var obj = jQuery.parseJSON(txt);
+    var obj = jQuery.parseJSON(evt.data);
     if (obj.type == 'AVG') {
         updateChart(obj);
         updateMap(obj);

@@ -35,7 +35,7 @@ $( document ).ready(function() {
         checkEnabled();
     });
 
-    $('input[name="themeCheck"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('input[name="themeCheck"]').on('switchChange.bootstrapSwitch', function() {
         $('#themeSubmit').trigger('click');
     });
 

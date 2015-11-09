@@ -24,7 +24,7 @@ function drawChart() {
 }
 
 function updateCharts(jsonVar){
-    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
+    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.temp)]);
     drawChart();
 }
 
@@ -62,8 +62,8 @@ function drawRegionsMap() {
 
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
-            regionsData.setValue(y, 1, dataRow.TEMP);
+        if (regionsData.getValue(y, 0) == dataRow.country) {
+            regionsData.setValue(y, 1, dataRow.temp);
         }
         drawRegionsMap();
     }
@@ -75,12 +75,12 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.COUNTRY) {
+        if (value.country == dataRow.country) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'temperature',
-                value: dataRow.TEMP
+                value: dataRow.temp
             });
         }
     });
@@ -91,11 +91,11 @@ function updateTable(dataRow) {
 }
 
 function addRow(dataRow){
-    row = [];
+    var row = [];
     row.push({
-        name: dataRow.NAME,
-        country:dataRow.COUNTRY,
-        temperature: dataRow.TEMP
+        name: dataRow.name,
+        country:dataRow.country,
+        temperature: dataRow.temp
     });
 
     var table = $('#events-table');

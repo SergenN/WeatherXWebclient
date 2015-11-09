@@ -3,7 +3,7 @@
  */
 
 $('#events-table').bootstrapTable({
-    onClickRow: function (row, $element) {
+    onClickRow: function (row) {
         var url = window.location.href;
         url = url.replace("stations.php", "");
         url = url+"station.php?id="+row.stn;

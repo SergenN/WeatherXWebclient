@@ -31,11 +31,11 @@ $(document).ready(function(){
                 id: key
             });
 
-            (function(marker, key) {
-                google.maps.event.addListener(marker, 'click', function() {
+            (function(marker) {
+                google.maps.event.addListener(marker, 'click', function(){
                     var url = window.location.href;
                     url = url.replace("index.php", "");
-                    url = url+"station.php?id="+marker.id;
+                    url = url+"station.php?id=" + marker.id;
                     var win = window.open(url, "_blank");
                     win.focus();
                 });
@@ -43,6 +43,6 @@ $(document).ready(function(){
 
             gmarkers.push(marker);
         });
-        var markerCluster = new MarkerClusterer(map, gmarkers);
+        new MarkerClusterer(map, gmarkers);
     });
 });
