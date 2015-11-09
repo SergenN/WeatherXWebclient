@@ -19,7 +19,7 @@ include_once 'includes/navbar.php';
     <div class="page-header">
         <h1 class="pull-left">Rainfall in the Pacific and the coastline of Asia</h1>
         <div class="pull-right">
-            <div class="btn-group">
+            <div class="btn-custom">
                 <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download data"></form>
             </div>
         </div>
