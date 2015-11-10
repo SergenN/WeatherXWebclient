@@ -53,10 +53,10 @@ function drawChart() {
 }
 
 function updateCharts(jsonVar){
-    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.slp), parseFloat(jsonVar.stp)]);
-    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.sndp), parseFloat(jsonVar.prcp)]);
-    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.temp), parseFloat(jsonVar.dewp)]);
-    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.visib)]);
+    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
+    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
+    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
+    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
     drawChart();
 }
 
@@ -101,16 +101,16 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function updateTable(jsonVar){
-    $("#TEMP").html(jsonVar.temp +"&deg;C");
-    $("#STP").html(jsonVar.stp +" mbar");
-    $("#SLP").html(jsonVar.slp +" mbar");
-    $("#DEWP").html(jsonVar.dewp +"&deg;C");
-    $("#VISIB").html(jsonVar.visib +" km");
-    $("#WDSP").html(jsonVar.wdsp +" km/h");
-    $("#PRCP").html(jsonVar.prcp +" cm");
-    $("#SNDP").html(jsonVar.sndp +" cm");
-    $("#CLDC").html(jsonVar.cldc +"%");
-    $("#WNDDIR").html(degreesToText(jsonVar.wnddir));
+    $("#TEMP").html(jsonVar.TEMP +"&deg;C");
+    $("#STP").html(jsonVar.STP +" mbar");
+    $("#SLP").html(jsonVar.SLP +" mbar");
+    $("#DEWP").html(jsonVar.DEWP +"&deg;C");
+    $("#VISIB").html(jsonVar.VISIB +" km");
+    $("#WDSP").html(jsonVar.WDSP +" km/h");
+    $("#PRCP").html(jsonVar.PRCP +" cm");
+    $("#SNDP").html(jsonVar.SNDP +" cm");
+    $("#CLDC").html(jsonVar.CLDC +"%");
+    $("#WNDDIR").html(degreesToText(jsonVar.WNDDIR));
 }
 
 function degreesToText(winddirection) {

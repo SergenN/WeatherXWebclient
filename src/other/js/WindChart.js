@@ -48,17 +48,17 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.country) {
+        if (value.country == dataRow.COUNTRY) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wdsp',
-                value: dataRow.wdsp
+                value: dataRow.WDSP
             });
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wnddir',
-                value: dataRow.wnddir
+                value: dataRow.WNDDIR
             });
         }
     });
@@ -71,9 +71,9 @@ function updateTable(dataRow) {
 function addRow(dataRow){
     var row = [];
     row.push({
-        country: dataRow.country,
-        wdsp: dataRow.wdsp,
-        wnddir: degreesToText(dataRow.wnddir)
+        country: dataRow.COUNTRY,
+        wdsp: dataRow.WDSP,
+        wnddir: degreesToText(dataRow.WNDDIR)
     });
 
     $('#events-table').bootstrapTable('append', row);
@@ -84,12 +84,15 @@ function addRow(dataRow){
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
-    socket.send("GET 10620");
+    socket.send("GET_WORLD WNDDIR AVG");
+    socket.send("GET_WORLD WNDDIR RAW");
+    socket.send("GET_WORLD WDSP AVG");
+    socket.send("GET_WORLD WDSP RAW");
 };
 
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
-    animateCompass(parseFloat(obj.wnddir));
+    animateCompass(parseFloat(obj.WNDDIR));
     updateCharts(obj);
     updateTable(obj);
 };
@@ -100,7 +103,7 @@ socket.onerror = function(err) {};
 /* updateTable */
 
 function updateCharts(jsonVar){
-    windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.wdsp)]);
+    windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.WDSP)]);
     drawChart();
 }
 

@@ -24,7 +24,7 @@ function drawChart() {
 }
 
 function updateCharts(jsonVar){
-    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.temp)]);
+    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
     drawChart();
 }
 
@@ -62,8 +62,8 @@ function drawRegionsMap() {
 
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.country) {
-            regionsData.setValue(y, 1, dataRow.temp);
+        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
+            regionsData.setValue(y, 1, dataRow.TEMP);
         }
         drawRegionsMap();
     }
@@ -75,12 +75,12 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.country) {
+        if (value.country == dataRow.COUNTRY) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'temperature',
-                value: dataRow.temp
+                value: dataRow.TEMP
             });
         }
     });
@@ -93,9 +93,9 @@ function updateTable(dataRow) {
 function addRow(dataRow){
     var row = [];
     row.push({
-        name: dataRow.name,
-        country:dataRow.country,
-        temperature: dataRow.temp
+        name: dataRow.STNAME, //dataRow.name,
+        country:dataRow.COUNTRY,
+        temperature: dataRow.TEMP
     });
 
     var table = $('#events-table');
@@ -107,17 +107,19 @@ var socket = new WebSocket("ws://127.0.0.1:8080/");
 
 socket.onopen = function() {
     socket.send("GET_RAD 37,127.30,5000 TEMP AVG");
-    socket.send("GET_COUNTRY CHINA TEMP AVG");
-    socket.send("GET_COUNTRY JAPAN TEMP AVG");
+    socket.send("GET_COUNTRY CHINA COUNTRY,STNAME,TEMP AVG");
+    socket.send("GET_COUNTRY JAPAN COUNTRY,STNAME,TEMP AVG");
     socket.send("GET_RAD 37,127.30,5000 TEMP RAW");
-    socket.send("GET_COUNTRY TAIWAN TEMP AVG");
-    socket.send("GET_COUNTRY NORTH_KOREA TEMP AVG");
-    socket.send("GET_COUNTRY SOUTH_KOREA TEMP AVG");
-    socket.send("GET_COUNTRY MONGOLIA TEMP AVG");
+    socket.send("GET_COUNTRY TAIWAN COUNTRY,TEMP AVG");
+    //socket.send("GET_COUNTRY NORTH_KOREA COUNTRY,TEMP AVG");
+    //socket.send("GET_COUNTRY SOUTH_KOREA COUNTRY,TEMP AVG");
+    socket.send("GET_COUNTRY MONGOLIA COUNTRY,TEMP AVG");
 };
+
 /*var y = 0;*/
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
+    console.log(obj);
 
     // test for table
 /*    var txt = '{"name":"De Bilt","type":"RAW","country":"China","temp":'+ y + '}';
