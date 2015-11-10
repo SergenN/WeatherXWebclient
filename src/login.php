@@ -22,8 +22,8 @@ if ($user->isLoggedIn()){
     header("Location: index.php");
 }
 
-include_once 'includes/header.php';
-?>
+include_once 'includes/header.php'; ?>
+
     <div class="col-md-6 col-md-offset-3" style="margin-top: -30px;">
         <img class="img-responsive center-block" src="other/img/logo.png">
         <br />
@@ -41,5 +41,6 @@ include_once 'includes/header.php';
             <button type="submit" name="submitLogin" class="btn btn-default">Login</button>
         </form>
     </div>
+
 <?php include_once 'includes/footer.php'; ?>
 <?php if ($valid == "false"){ echo '<script type="text/javascript"> swal("Invalid login!", "You entered a wrong username or password.", "error"); </script>'; }?>

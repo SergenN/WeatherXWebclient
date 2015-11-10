@@ -41,6 +41,13 @@ $( document ).ready(function() {
 
 });
 
+/**
+ * lengthCheck,
+ * check if the input box contains text.
+ *
+ * @param div, input box name
+ * @returns {boolean}, true if it contains text
+ */
 function lengthCheck(div){
     if($('#'+div).val().length > 0){
         setChecked(div);
@@ -51,6 +58,12 @@ function lengthCheck(div){
     }
 }
 
+/**
+ * setChecked,
+ * set the input box on 'passing'.
+ *
+ * @param div, the div name the input box is in
+ */
 function setChecked(div){
     if (document.getElementById(div+"Div").className.indexOf('has-error') != -1) {
         document.getElementById(div+"Div").className = document.getElementById(div+"Div").className.replace('has-error', 'has-success');
@@ -58,6 +71,12 @@ function setChecked(div){
     }
 }
 
+/**
+ * setUnchecked,
+ * set the input box on 'disabled'.
+ *
+ * @param div, the div name the input box is in
+ */
 function setUnchecked(div){
     if (document.getElementById(div+"Div").className.indexOf('has-success') != -1) {
         document.getElementById(div+"Div").className = document.getElementById(div+"Div").className.replace('has-success', 'has-error');
@@ -65,6 +84,11 @@ function setUnchecked(div){
     }
 }
 
+/**
+ * checkEnabled,
+ * set the submit button on enabled when newpass, newpassr and oldpass are all set to true
+ * else  set the submit button to disabled.
+ */
 function checkEnabled(){
     if (newPass && newPassr && oldPass) {
         $("#submitPass").prop('disabled', false);

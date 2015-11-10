@@ -8,6 +8,11 @@ var rainfallChart, rainfallOptions, rainfallData, regionsChart, regionsOptions, 
 google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
+/**
+ * initChart,
+ * this function will initialize the rainfallChart, rainfallOptions and rainfallData
+ * and make a call to draw the chart.
+ */
 function initChart(){
     var rWidth = ($(document).width() / 100) * 50;
     var rHeight = ($(document).height() / 100)  * 30;
@@ -20,10 +25,20 @@ function initChart(){
     drawChart();
 }
 
+/**
+ * drawChart,
+ * This function will draw the rainfallChart
+ */
 function drawChart() {
     rainfallChart.draw(rainfallData, rainfallOptions);
 }
 
+/**
+ * updateChart,
+ * this function will add a row to the rainfallData and make a call to draw the chart.
+ *
+ * @param jsonVar, json variable of the data you want to draw
+ */
 function updateChart(jsonVar){
     rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.PRCP)]);
     drawChart();
@@ -33,6 +48,11 @@ function updateChart(jsonVar){
 google.load('visualization', '1', {packages: ['geochart']});
 google.setOnLoadCallback(initRegions);
 
+/**
+ * initRegions,
+ * this function will initialize the regionsData, regionsOptions and regionsData
+ * and make a call to draw the regionsMap.
+ */
 function initRegions(){
     regionsData = new google.visualization.DataTable();
     regionsData.addColumn('string', 'Country');
@@ -57,10 +77,20 @@ function initRegions(){
     drawRegionsMap();
 }
 
+/**
+ * drawRegionsMap,
+ * This function will draw the regions map.
+ */
 function drawRegionsMap() {
     regionsChart.draw(regionsData, regionsOptions);
 }
 
+/**
+ * updateMap,
+ * this function will add a change the value of a country with the given value.
+ *
+ * @param dataRow, json variable of the data you want to draw
+ */
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
         if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
@@ -71,6 +101,13 @@ function updateMap(dataRow) {
 }
 
 /* Table options */
+/**
+ * updateTable,
+ * this function will update a row in the table with the given data and call addRow if there is no matching row found.
+ *
+ * @param dataRow, the data that needs to be placed in the table
+ * @param stn, check if this change has to be issued in the stations table or the country table
+ */
 function updateTable(dataRow, stn) {
     var table = stn ? $('#events-table-stations') : $('#events-table-countries');
     var found = false;
@@ -97,6 +134,13 @@ function updateTable(dataRow, stn) {
     }
 }
 
+/**
+ * addRow,
+ * add a new row to the table
+ *
+ * @param dataRow, the data that needs to be inserted
+ * @param stn, check if this change has to be issued in the stations table or the country table
+ */
 function addRow(dataRow, stn){
     row = [];
     if(stn){
@@ -151,8 +195,6 @@ socket.onopen = function() {
     socket.send("GET_COUNTRY PAPUA_NEW_GUINEA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
     socket.send("GET_COUNTRY PHILIPPINES COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
 };
-
-/*var y = 0;*/
 socket.onmessage = function (evt) {
 /*    var txt = '{"name":"De Bilt","type":"AVG","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
     y++;*/
@@ -167,6 +209,5 @@ socket.onmessage = function (evt) {
         updateTable(obj, true);
     }
 };
-
 socket.onclose = function() {};
 socket.onerror = function(err) {};

@@ -1,5 +1,7 @@
 /**
  * Created by Sergen on 4-11-2015.
+ *
+ * this script is supposed to make table rows on stations.php clickable.
  */
 
 $('#events-table').bootstrapTable({

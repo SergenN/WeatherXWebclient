@@ -20,5 +20,5 @@ if ($requiresLogin && !$user->isLoggedIn()){
 }
 
 if ($userLevel > $user->getLevel()){
-
+//check for minimal authority level
 }

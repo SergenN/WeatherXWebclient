@@ -1,5 +1,8 @@
 /**
  * Created by Sergen on 3-11-2015.
+ *
+ * This script is responsible for creating a map,
+ * loading all markers on the map by reading a json file and cluster the markers.
  */
 
 $(document).ready(function(){
