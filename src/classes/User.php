@@ -87,9 +87,16 @@ class User {
      * @param $newPass
      * @param SQLConnection $SQLConnection
      */
-    public function setPassword($newPass, $SQLConnection){
+    public function setPassword($oldPass, $newPass, $SQLConnection){
         $newPass = $SQLConnection->escapeString($newPass);
-        $result = $SQLConnection->query("UPDATE `users` SET `password`='".$newPass."' WHERE `id`='".$SQLConnection->escapeString($this->getId())."';");
+        $oldPass = $SQLConnection->escapeString($oldPass);
+
+        $login = $SQLConnection->query("SELECT * FROM users WHERE `id` = '".$this->getId()."' AND password = '".$oldPass."';");
+        if ($login->num_rows > 0){
+            $SQLConnection->query("UPDATE `users` SET `password`='".$newPass."' WHERE `id`='".$this->getId()."';");
+            return "true";
+        }
+        return "false";
     }
 
     /**
@@ -99,13 +106,13 @@ class User {
     public function setTheme($theme, $SQLConnection){
         if ($theme || $theme == 1){
             if ($this->getTheme() == "default"){
-                $SQLConnection->query("UPDATE `users` SET `theme`='green' WHERE `id`='".$SQLConnection->escapeString($this->getId())."';");
+                $SQLConnection->query("UPDATE `users` SET `theme`='green' WHERE `id`='".$this->getId()."';");
                 $this->userTheme = "green";
                 $this->save();
             }
         } else {
             if ($this->getTheme() != "default"){
-                $SQLConnection->query("UPDATE `users` SET `theme`='default' WHERE `id`='".$SQLConnection->escapeString($this->getId())."';");
+                $SQLConnection->query("UPDATE `users` SET `theme`='default' WHERE `id`='".$this->getId()."';");
                 $this->userTheme = "default";
                 $this->save();
             }
@@ -128,7 +135,6 @@ class User {
      * @return bool
      */
     public function validateLogin($userMail, $password, $SQLConnection){
-
         $userMail = $SQLConnection->escapeString($userMail);
         $password = $SQLConnection->escapeString($password);
 
@@ -149,9 +155,9 @@ class User {
 
             $SQLConnection->query("UPDATE `users` SET `lastlogin`='".$mysqltime."', `IP`='".$ip."'  WHERE `id`='".$this->getId()."';");
 
-            return true;
+            return "true";
         }
-        return false;
+        return "false";
     }
 
 }

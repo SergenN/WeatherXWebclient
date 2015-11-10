@@ -6,9 +6,5 @@
  * Time: 11:03
  */
 ?>
-
-    <script src="other/js/bootstrap.min.js"></script>
-    <script src="other/js/bootstrap-table.js"></script>
-
     </body>
 </html>

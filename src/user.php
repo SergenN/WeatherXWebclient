@@ -11,9 +11,11 @@ $title = "User";
 
 require_once 'includes/init.php';
 
+$login = "rekt";
+
 if (!empty($_POST)){
     if(isset($_POST['submitPass'])){
-        $user->setPassword($_POST['newPass'], $connection);
+        $login = $user->setPassword($_POST['oldPass'], $_POST['newPass'], $connection);
     }
     if(isset($_POST['themeSubmit'])){
         $active = (isset($_POST['themeCheck']) && $_POST['themeCheck'] == '1') ? true : false;
@@ -99,3 +101,16 @@ include_once 'includes/navbar.php';
 </div>
 <script src="other/js/userConfig.js"></script>
 <?php include_once 'includes/footer.php'; ?>
+<?php
+    if ($login == "false"){
+        echo '<script type="text/javascript">
+            swal("Invalid Password!", "You entered a wrong password.", "error");
+        </script>';
+    }
+    if ($login == "true"){
+        echo '<script type="text/javascript">
+            swal("Password changed!", "Your password has been changed", "success");
+        </script>';
+    }
+?>
+
