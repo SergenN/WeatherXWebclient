@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="other/css/style.css">
         <link rel="stylesheet" href="other/css/bootstrap-table.min.css">
         <link rel="stylesheet" href="other/css/bootstrap-switch.min.css">
-        <link rel="stylesheet" href="other/css/sweetalert.min.css">
+        <link rel="stylesheet" href="other/css/bootstrap-alert.min.css">
 
         <?php if($user->getTheme() == 'green'){
             echo '<link rel="stylesheet" href="other/css/greenTheme.css">';
@@ -27,7 +27,7 @@
 
         <!--Dependent libraries-->
         <script src="other/js/bootstrap-table.min.js"></script>
-        <script src="other/js/sweetalert.min.js"></script>
+        <script src="other/js/bootstrap-alert.min.js"></script>
         <script src="other/js/bootstrap-switch.min.js"></script>
     </head>
     <body>
