@@ -6,20 +6,24 @@
  * Time: 16:26
  */
 
-require_once 'includes/init.php';
-
 $requiresLogin = true;
 $userLevel = 1;
 $title = "Wind";
+
+require_once 'includes/init.php';
+include_once 'includes/header.php';
+include_once 'includes/navbar.php';
 ?>
 
-<?php include_once 'includes/header.php'; ?>
-<?php include_once 'includes/navbar.php'; ?>
-
     <div class="container">
-
         <div class="page-header">
-            <h1>Average wind speed and direction worldwide</h1>
+            <h1 class="pull-left">Average wind speed and direction worldwide</h1>
+            <div class="pull-right">
+                <div class="btn-custom">
+                    <form action="" method="post"><input type="submit" class="btn btn-primary" value="Download data"></form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
 
         <div class="row">
@@ -39,103 +43,18 @@ $title = "Wind";
 
         <div class="row">
             <div class="col-md-12">
-
                 <h3>Summary</h3>
 
-                <table data-toggle="table" id="events-table" data-url="data2.json" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+                <table data-toggle="table" id="events-table" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
                     <thead>
                         <tr>
-                            <th data-field="stn" data-sortable="true">Station</th>
                             <th data-field="country" data-sortable="true">Country</th>
                             <th data-field="wdsp" data-sortable="true">Wind speed</th>
                             <th data-field="wnddir" data-sortable="true">Wind direction</th>
                         </tr>
                     </thead>
-                    <tr>
-                        <td>De Bilt</td>
-                        <td>Netherlands</td>
-                        <td>20 km/h</td>
-                        <td>Northwest</td>
-                    </tr>
-                    <tr>
-                        <td>Groningen Ap Eelde</td>
-                        <td>Netherlands</td>
-                        <td>17 km/h</td>
-                        <td>West</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Gegroet</td>
-                        <td>Hallo</td>
-                        <td>Hoi</td>
-                        <td>Hoi</td>
-                    </tr>
-                    <tr>
-                        <td>Moi</td>
-                        <td>Bonjour</td>
-                        <td>Hello</td>
-                        <td>Hoi</td>
-                    </tr>
                 </table>
+                <br>
             </div>
         </div>
     </div>

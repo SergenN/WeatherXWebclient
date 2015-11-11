@@ -6,11 +6,12 @@
  * Time: 15:01
  */
 
+$requiresLogin = true;
+$userLevel = 1;
+
 require_once 'includes/init.php';
 
 if ($user->isLoggedIn()) {
     $user->logOut();
 }
 header("Location: login.php");
-
-?>

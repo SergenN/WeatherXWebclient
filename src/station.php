@@ -9,18 +9,21 @@
  * This page differs from stations.php
  */
 
-require_once 'includes/init.php';
-
 $requiresLogin = true;
 $userLevel = 1;
-$id = $_GET['id'];
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    $id = 10010;
+}
 $title = "Station " .  $id;
 
-require 'includes/station_processor.php';
+require_once 'includes/init.php';
+include_once 'includes/header.php';
+include_once 'includes/navbar.php';
+require 'includes/StationProcessor.php';
 
 ?>
-<?php include_once 'includes/header.php'; ?>
-<?php include_once 'includes/navbar.php'; ?>
 <div class="container">
 
     <div class="page-header">
@@ -103,6 +106,7 @@ require 'includes/station_processor.php';
             <div id="visib_div"></div>
         </div>
     </div>
+
 </div>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>

@@ -6,37 +6,41 @@
  * Time: 10:40
  */
 
+$requiresLogin = false;
+$userLevel = 0;
+$title = "Login";
+
 require_once 'includes/init.php';
 
+$valid = "rekt";
+
 if (isset($_POST['submitLogin'])){
-    $user->validateLogin($_POST['email'], $_POST['pass'], $connection);
+    $valid = $user->validateLogin($_POST['email'], $_POST['pass'], $connection);
 }
 
 if ($user->isLoggedIn()){
     header("Location: index.php");
 }
 
-$requiresLogin = false;
-$userLevel = 0;
-$title = "Login";
+include_once 'includes/header.php'; ?>
 
-?>
-<?php include_once 'includes/header.php'; ?>
     <div class="col-md-6 col-md-offset-3" style="margin-top: -30px;">
         <img class="img-responsive center-block" src="other/img/logo.png">
-        <br>
+        <br />
         <p style="text-align: center">Welcome on WeatherX. Please login to access the weather data from our database.</p><br>
 
         <form method="post" action="">
             <div class="form-group">
                 <label for="inputEmail">Email address</label>
-                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
-                <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
+                <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password" required>
             </div>
             <button type="submit" name="submitLogin" class="btn btn-default">Login</button>
         </form>
     </div>
+
 <?php include_once 'includes/footer.php'; ?>
+<?php if ($valid == "false"){ echo '<script type="text/javascript"> swal("Invalid login!", "You entered a wrong username or password.", "error"); </script>'; }?>

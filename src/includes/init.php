@@ -9,8 +9,16 @@
 session_start();
 
 spl_autoload_register(function($class){
-    require_once $class . '.php';
+    require_once  $_SERVER['DOCUMENT_ROOT'] .'/' . $class . '.php';
 });
 
 $connection = new \classes\SQLConnection("localhost", "root", "", "weatherxweb");
 $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : new \classes\User();
+
+if ($requiresLogin && !$user->isLoggedIn()){
+    header("Location: login.php");
+}
+
+if ($userLevel > $user->getLevel()){
+//check for minimal authority level
+}

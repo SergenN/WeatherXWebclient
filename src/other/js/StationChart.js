@@ -9,6 +9,12 @@ var airPressureChart, airPressureData, airPressureOptions, precipitationChart, p
 google.load('visualization', '1', {packages: ['line', 'corechart']});
 google.setOnLoadCallback(initChart);
 
+/**
+ * initChart,
+ * this function will initialize the dataSets, chartOptions and charts for:
+ * airPressure, precipitation, dewpoint and visibility
+ * after the initialization if will call for a draw.
+ */
 function initChart(){
     airPressureChart = new google.visualization.LineChart(document.getElementById('airpress_div'));
     airPressureOptions = {title: 'Millibars', curveType: 'function', legend: { position: 'bottom' }};
@@ -32,8 +38,8 @@ function initChart(){
     dewPointData = new google.visualization.DataTable();
 
     dewPointData.addColumn('number', 'Seconds');
-    dewPointData.addColumn('number','Temperature (&deg;C)');
-    dewPointData.addColumn('number','Dew point (&deg;C)');
+    dewPointData.addColumn('number','Temperature (degrees Celsius)');
+    dewPointData.addColumn('number','Dew point (degrees Celsius)');
 
     visibilityChart = new google.visualization.LineChart(document.getElementById('visib_div'));
     visibilityOptions = {title: 'Kilometers', curveType: 'function', legend: { position: 'bottom' }};
@@ -45,6 +51,10 @@ function initChart(){
     drawChart();
 }
 
+/**
+ * drawChart,
+ * draw the airpressure, percipitation, dewpoint and visibility charts.
+ */
 function drawChart() {
     airPressureChart.draw(airPressureData, airPressureOptions);
     precipitationChart.draw(precipitationData, precipitationOptions);
@@ -52,15 +62,27 @@ function drawChart() {
     visibilityChart.draw(visibilityData, visibilityOptions);
 }
 
-/* Socket options */
+/**
+ * updateChart,
+ * this function will add a point on the airpressure, percipitation, dewpoint and visibility charts and make a call to draw the chart.
+ *
+ * @param jsonVar, json variable of the data you want to draw
+ */
+function updateCharts(jsonVar){
+    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
+    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
+    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
+    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
+    drawChart();
+}
 
+/* Socket options */
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
     var cmd = "GET " + getUrlParameter("id");
     socket.send(cmd);
 };
 var counter = 1;
-
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
     updateCharts(obj);
@@ -73,12 +95,17 @@ socket.onmessage = function (evt) {
     }
     counter = counter + 1;
 };
-
 socket.onclose = function() {};
 socket.onerror = function(err) {};
 
-/*utils*/
-
+/* Utils */
+/**
+ * getURLParameter,
+ * get the value of a parameter in the GET url.
+ *
+ * @param sParam, the key you want to search for in the URL
+ * @returns String, the value of the key you searched for or true if the key is not found
+ */
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -94,6 +121,12 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+/**
+ * updateTable,
+ * update the table with new data.
+ *
+ * @param jsonVar, the json object of the data you want to insert in the table
+ */
 function updateTable(jsonVar){
     $("#TEMP").html(jsonVar.TEMP +"&deg;C");
     $("#STP").html(jsonVar.STP +" mbar");
@@ -107,15 +140,14 @@ function updateTable(jsonVar){
     $("#WNDDIR").html(degreesToText(jsonVar.WNDDIR));
 }
 
-function updateCharts(jsonVar){
-    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
-    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
-    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
-    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
-    drawChart();
-}
-
-var degreesToText = function degreesToText(winddirection) {
+/**
+ * degreesToText,
+ * convert the degrees of windDirection to text.
+ *
+ * @param winddirection, the direction in degrees
+ * @returns String, direction in letters or "Unknown"
+ */
+function degreesToText(winddirection) {
     if(winddirection >= 0 && winddirection <= 360) {
         if ((winddirection > 337.5 && winddirection < 360) || (winddirection <= 22.5)) {
             return "North";
