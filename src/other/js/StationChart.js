@@ -55,6 +55,7 @@ function initChart(){
  * drawChart,
  * draw the airpressure, percipitation, dewpoint and visibility charts.
  */
+
 function drawChart() {
     airPressureChart.draw(airPressureData, airPressureOptions);
     precipitationChart.draw(precipitationData, precipitationOptions);
@@ -68,11 +69,19 @@ function drawChart() {
  *
  * @param jsonVar, json variable of the data you want to draw
  */
+var rows = 0;
 function updateCharts(jsonVar){
-    airPressureData.addRow([airPressureData.getNumberOfRows()+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
-    precipitationData.addRow([precipitationData.getNumberOfRows()+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
-    dewPointData.addRow([dewPointData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
-    visibilityData.addRow([visibilityData.getNumberOfRows()+1, parseFloat(jsonVar.VISIB)]);
+    if (airPressureData.getNumberOfRows() >= 100) {
+        airPressureData.removeRow(100-airPressureData.getNumberOfRows());
+        precipitationData.removeRow(100-precipitationData.getNumberOfRows());
+        dewPointData.removeRow(100-dewPointData.getNumberOfRows());
+        visibilityData.removeRow(100-visibilityData.getNumberOfRows());
+    }
+    airPressureData.addRow([rows+1, parseFloat(jsonVar.SLP), parseFloat(jsonVar.STP)]);
+    precipitationData.addRow([rows+1, parseFloat(jsonVar.SNDP), parseFloat(jsonVar.PRCP)]);
+    dewPointData.addRow([rows+1, parseFloat(jsonVar.TEMP), parseFloat(jsonVar.DEWP)]);
+    visibilityData.addRow([rows+1, parseFloat(jsonVar.VISIB)]);
+    rows++;
     drawChart();
 }
 
@@ -84,7 +93,9 @@ socket.onopen = function() {
 };
 var counter = 1;
 socket.onmessage = function (evt) {
-    var obj = jQuery.parseJSON(evt.data);
+    var data = evt.data;
+
+    var obj = jQuery.parseJSON(data);
     updateCharts(obj);
 
     if (counter == 1){

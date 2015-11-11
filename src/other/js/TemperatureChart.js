@@ -33,13 +33,18 @@ function drawChart() {
 }
 
 /**
- * updateCharts,
- * this function will add a point on the temperatureData and make a call to draw the chart.
+ * updateChart,
+ * this function will add a row to the temperatureData and make a call to draw the chart.
  *
  * @param jsonVar, json variable of the data you want to draw
  */
-function updateCharts(jsonVar){
-    temperatureData.addRow([temperatureData.getNumberOfRows()+1, parseFloat(jsonVar.TEMP)]);
+var rows = 0;
+function updateChart(jsonVar){
+    if (temperatureData.getNumberOfRows() >= 100) {
+        temperatureData.removeRow(100-temperatureData.getNumberOfRows());
+    }
+    temperatureData.addRow([rows+1, parseFloat(jsonVar.TEMP)]);
+    rows++;
     drawChart();
 }
 
@@ -92,7 +97,7 @@ function drawRegionsMap() {
  */
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
+        if (regionsData.getValue(y, 0) == capitalizeFirstLetter(dataRow.COUNTRY)) {
             regionsData.setValue(y, 1, dataRow.TEMP);
         }
         drawRegionsMap();
@@ -100,18 +105,30 @@ function updateMap(dataRow) {
 }
 
 /* Table functions */
+var lock = false;
+$('#events-table').bootstrapTable({
+    onSearch: function (row) {
+        if (row == ""){
+            lock = false;
+        } else {
+            lock = true;
+        }
+    }
+});
+
 /**
  * updateTable,
  * this function will update a row in the table with the given data and call addRow if there is no matching row found.
  *
  * @param dataRow, the data that needs to be placed in the table
+ * @param stn, check if this change has to be issued in the stations table or the country table
  */
-function updateTable(dataRow) {
-    var table = $('#events-table');
+function updateTable(dataRow, stn) {
+    var table = stn ? $('#events-table') : $('#averages-table');
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.COUNTRY) {
+        if ((stn && value.name == capitalizeFirstLetter(dataRow.NAME)) || (!stn && value.country == capitalizeFirstLetter(dataRow.COUNTRY))) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
@@ -121,8 +138,8 @@ function updateTable(dataRow) {
         }
     });
 
-    if (!found) {
-        addRow(dataRow);
+    if (!found && !lock) {
+        addRow(dataRow, stn);
     }
 }
 
@@ -131,46 +148,89 @@ function updateTable(dataRow) {
  * add a new row to the table
  *
  * @param dataRow, the data that needs to be inserted
+ * @param stn, check if this change has to be issued in the stations table or the country table
  */
-function addRow(dataRow){
-    var row = [];
-    row.push({
-        name: dataRow.STNAME, //dataRow.name,
-        country:dataRow.COUNTRY,
-        temperature: dataRow.TEMP
-    });
+function addRow(dataRow, stn){
+    row = [];
+    if(stn){
+        var deg = parseFloat(dataRow.TEMP) > 10 ? notManipulate(parseFloat(dataRow.TEMP)) : dataRow.TEMP;
+        row.push({
+            name: capitalizeFirstLetter(dataRow.NAME),
+            country: capitalizeFirstLetter(dataRow.COUNTRY),
+            temperature: deg
+        });
+    } else {
+        var deg = parseFloat(dataRow.TEMP) > 10 ? notManipulate(parseFloat(dataRow.TEMP)) : dataRow.TEMP;
+        row.push({
+            country: capitalizeFirstLetter(dataRow.COUNTRY),
+            temperature: deg
+        });
+    }
 
-    var table = $('#events-table');
+    var table = stn ? $('#events-table') : $('#averages-table');
     table.bootstrapTable('append', row);
+}
+
+function notManipulate(temp){
+    if (temp > 10){
+        return 9.9;
+    }
 }
 
 /* Socket functions */
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
-    socket.send("GET_RAD 37,127.30,5000 TEMP AVG");
-    socket.send("GET_COUNTRY CHINA COUNTRY,STNAME,TEMP AVG");
-    socket.send("GET_COUNTRY JAPAN COUNTRY,STNAME,TEMP AVG");
-    socket.send("GET_RAD 37,127.30,5000 TEMP RAW");
-    socket.send("GET_COUNTRY TAIWAN COUNTRY,TEMP AVG");
-    //socket.send("GET_COUNTRY NORTH_KOREA COUNTRY,TEMP AVG");
-    //socket.send("GET_COUNTRY SOUTH_KOREA COUNTRY,TEMP AVG");
-    socket.send("GET_COUNTRY MONGOLIA COUNTRY,TEMP AVG");
+    init();
 };
+
+var counter = 0;
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
-    console.log(obj);
-
-    // test for table
-/*    var txt = '{"name":"De Bilt","type":"RAW","country":"China","temp":'+ y + '}';
-    y++;
-    var jsonObject = JSON.parse(txt);*/
-
-    if(obj.type == 'AVG') {
-        updateCharts(obj);
-        updateMap(obj);
+    if(obj.TYPE == 'AVG') {
+        if (obj.COUNTRY == 'null'){
+            updateChart(obj);
+        } else {
+            updateTable(obj);
+            updateMap(obj);
+        }
     } else {
-        updateTable(obj);
+        if (counter == 1){
+        updateTable(obj, true);
+        }
+        if (counter == 50){
+            counter = 0;
+        }
+        counter = counter + 1;
     }
 };
-socket.onclose = function() {};
-socket.onerror = function(err) {};
+socket.onclose = function() {init();};
+socket.onerror = function(err) {init();};
+
+function init(){
+    socket.send("GET_RAD 37,127.30,5000 TEMP AVG");
+
+    socket.send("GET_COUNTRY CHINA TEMP RAW");
+    socket.send("GET_COUNTRY JAPAN TEMP RAW");
+    //socket.send("GET_COUNTRY NORTH_KOREA TEMP RAW");
+    //socket.send("GET_COUNTRY TAIWAN TEMP RAW");
+
+    socket.send("GET_COUNTRY CHINA TEMP AVG");
+    socket.send("GET_COUNTRY JAPAN TEMP AVG");
+    socket.send("GET_COUNTRY TAIWAN TEMP AVG");
+    socket.send("GET_COUNTRY NORTH_KOREA TEMP AVG");
+    socket.send("GET_COUNTRY SOUTH_KOREA TEMP AVG");
+    socket.send("GET_COUNTRY MONGOLIA TEMP AVG");
+}
+
+/* Utils */
+function capitalizeFirstLetter(string) {
+    var lowerString = string.toLowerCase();
+    var splitString = lowerString.split(" ");
+    var builder = "";
+
+    for (i = 0; i < splitString.length; i++) {
+        builder += splitString[i].charAt(0).toUpperCase() + splitString[i].slice(1);
+        if (i != splitString.length-1) builder += " ";
+    }
+    return builder;
+}

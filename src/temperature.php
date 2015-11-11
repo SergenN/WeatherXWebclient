@@ -32,24 +32,16 @@ include_once 'includes/navbar.php';
         <div class="row">
             <div class="col-md-6">
                 <h3>Averages</h3><br>
-                <table class="table">
+
+                <table data-toggle="table" id="averages-table" data-height="400" data-search="true" data-pagination="true" data-show-columns="true" data-page-list="[5, 10, 20, 50, 100]">
+                    <thead>
                     <tr>
-                        <td><strong>China</strong></td>
-                        <td>8 &deg;C</td>
+                        <th data-field="country" data-sortable="true">Country</th>
+                        <th data-field="temperature" data-sortable="true">Temperature</th>
                     </tr>
-                    <tr>
-                        <td><strong>Japan</strong></td>
-                        <td>10 &deg;C</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Total area</strong></td>
-                        <td>9 &deg;C</td>
-                    </tr>
+                    </thead>
                 </table>
+
             </div>
             <div class="col-md-6">
                 <h3>Graph</h3>

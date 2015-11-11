@@ -64,6 +64,17 @@ function drawChart() {
 
 
 /* Table functions */
+var lock = false;
+$('#events-table').bootstrapTable({
+    onSearch: function (row) {
+        if (row == ""){
+            lock = false;
+        } else {
+            lock = true;
+        }
+    }
+});
+
 
 /**
  * updateTable,
@@ -76,7 +87,7 @@ function updateTable(dataRow) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if (value.country == dataRow.COUNTRY) {
+        if (value.country == capitalizeFirstLetter(dataRow.COUNTRY)) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
@@ -86,12 +97,12 @@ function updateTable(dataRow) {
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'wnddir',
-                value: dataRow.WNDDIR
+                value: degreesToText(dataRow.WNDDIR)
             });
         }
     });
 
-    if (!found) {
+    if (!found && !lock) {
         addRow(dataRow);
     }
 }
@@ -105,7 +116,7 @@ function updateTable(dataRow) {
 function addRow(dataRow){
     var row = [];
     row.push({
-        country: dataRow.COUNTRY,
+        country: capitalizeFirstLetter(dataRow.COUNTRY),
         wdsp: dataRow.WDSP,
         wnddir: degreesToText(dataRow.WNDDIR)
     });
@@ -117,30 +128,53 @@ function addRow(dataRow){
 
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
-    socket.send("GET_WORLD WNDDIR AVG");
-    socket.send("GET_WORLD WNDDIR RAW");
-    socket.send("GET_WORLD WDSP AVG");
-    socket.send("GET_WORLD WDSP RAW");
+    init();
 };
+
+var counter = 0;
 socket.onmessage = function (evt) {
     var obj = jQuery.parseJSON(evt.data);
-    animateCompass(parseFloat(obj.WNDDIR));
-    updateCharts(obj);
-    updateTable(obj);
+
+    if(obj.TYPE == 'AVG') {
+        var rekt = obj.COUNTRY;
+        if (rekt.indexOf(",") != -1) {
+            animateCompass(parseFloat(obj.WNDDIR));
+            updateCharts(obj);
+        } else {
+            if (counter == 1){
+                updateTable(obj);
+            }
+            if (counter == 10){
+                counter = 0;
+            }
+            counter = counter + 1;
+        }
+    }
 };
-socket.onclose = function() {};
-socket.onerror = function(err) {};
+
+socket.onclose = function() {init();};
+socket.onerror = function(err) {init();};
+
+function init(){
+    socket.send("GET_WORLD WNDDIR,WDSP AVG");
+    socket.send("GET_WORLD WNDDIR,WDSP RAW");
+}
 
 /* updateTable */
 
 /**
- * updateCharts,
+ * updateChart,
  * this function will add a point on the windData and make a call to draw the chart.
  *
  * @param jsonVar, json variable of the data you want to draw
  */
+var rows = 0;
 function updateCharts(jsonVar){
-    windData.addRow([windData.getNumberOfRows()+1, parseFloat(jsonVar.WDSP)]);
+    if (windData.getNumberOfRows() >= 100) {
+        windData.removeRow(100-windData.getNumberOfRows());
+    }
+    windData.addRow([rows+1, parseFloat(jsonVar.WDSP)]);
+    rows++;
     drawChart();
 }
 
@@ -179,4 +213,16 @@ function degreesToText(winddirection) {
         }
     }
     return "Unknown";
+}
+
+function capitalizeFirstLetter(string) {
+    var lowerString = string.toLowerCase();
+    var splitString = lowerString.split(" ");
+    var builder = "";
+
+    for (i = 0; i < splitString.length; i++) {
+        builder += splitString[i].charAt(0).toUpperCase() + splitString[i].slice(1);
+        if (i != splitString.length-1) builder += " ";
+    }
+    return builder;
 }

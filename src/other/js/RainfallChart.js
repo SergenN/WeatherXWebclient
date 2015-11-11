@@ -17,11 +17,11 @@ function initChart(){
     var rWidth = ($(document).width() / 100) * 50;
     var rHeight = ($(document).height() / 100)  * 30;
     rainfallChart = new google.visualization.LineChart(document.getElementById('curve_div'));
-    rainfallOptions = {title: 'Avrage rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
+    rainfallOptions = {title: 'Average rainfall', curveType: 'function', legend: { position: 'bottom' }, width:rWidth, height:rHeight};
     rainfallData = new google.visualization.DataTable();
 
     rainfallData.addColumn('number','Seconds');
-    rainfallData.addColumn('number','Average rainfall (mm)');
+    rainfallData.addColumn('number','Average rainfall (cm)');
     drawChart();
 }
 
@@ -39,8 +39,13 @@ function drawChart() {
  *
  * @param jsonVar, json variable of the data you want to draw
  */
+var rows = 0;
 function updateChart(jsonVar){
-    rainfallData.addRow([rainfallData.getNumberOfRows()+1, parseFloat(jsonVar.PRCP)]);
+    if (rainfallData.getNumberOfRows() >= 100) {
+        rainfallData.removeRow(100-rainfallData.getNumberOfRows());
+    }
+    rainfallData.addRow([rows+1, parseFloat(jsonVar.PRCP)]);
+    rows++;
     drawChart();
 }
 
@@ -93,7 +98,8 @@ function drawRegionsMap() {
  */
 function updateMap(dataRow) {
     for (var y = 0, maxrows = regionsData.getNumberOfRows(); y < maxrows; y++) {
-        if (regionsData.getValue(y, 0) == dataRow.COUNTRY) {
+        console.log(dataRow.COUNTRY);
+        if (regionsData.getValue(y, 0) == capitalizeFirstLetter(dataRow.COUNTRY)) {
             regionsData.setValue(y, 1, dataRow.PRCP);
             drawRegionsMap();
         }
@@ -101,6 +107,17 @@ function updateMap(dataRow) {
 }
 
 /* Table options */
+var lock = false;
+$('#events-table').bootstrapTable({
+    onSearch: function (row) {
+        if (row == ""){
+            lock = false;
+        } else {
+            lock = true;
+        }
+    }
+});
+
 /**
  * updateTable,
  * this function will update a row in the table with the given data and call addRow if there is no matching row found.
@@ -113,23 +130,17 @@ function updateTable(dataRow, stn) {
     var found = false;
 
     jQuery.each(table.bootstrapTable('getData'), function (index, value) {
-        if ((stn && value.stn == dataRow.STN) || (!stn && value.country == dataRow.COUNTRY)) {
+        if ((stn && value.stn == capitalizeFirstLetter(dataRow.NAME)) || (!stn && value.country == capitalizeFirstLetter(dataRow.COUNTRY))) {
             found = true;
             table.bootstrapTable('updateCell', {
                 index: index,
                 field: 'prcp',
                 value: dataRow.PRCP
             });
-
-            table.bootstrapTable('updateCell', {
-                index: index,
-                field: 'sndp',
-                value: dataRow.SNDP
-            });
         }
     });
 
-    if (!found) {
+    if (!found && !lock) {
         addRow(dataRow, stn);
     }
 }
@@ -145,16 +156,14 @@ function addRow(dataRow, stn){
     row = [];
     if(stn){
         row.push({
-            stn: dataRow.STNAME,
-            country: dataRow.COUNTRY,
-            prcp: dataRow.PRCP,
-            sndp: dataRow.SNDP
+            stn: capitalizeFirstLetter(dataRow.NAME),
+            country: capitalizeFirstLetter(dataRow.COUNTRY),
+            prcp: dataRow.PRCP
         });
     } else {
         row.push({
-            country: dataRow.COUNTRY,
-            prcp: dataRow.PRCP,
-            sndp: dataRow.SNDP
+            country: capitalizeFirstLetter(dataRow.COUNTRY),
+            prcp: dataRow.PRCP
         });
     }
 
@@ -165,49 +174,90 @@ function addRow(dataRow, stn){
 /* Socket functions */
 var socket = new WebSocket("ws://127.0.0.1:8080/");
 socket.onopen = function() {
-    /*socket.send("GET_COAST SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COAST STNUMBER,COUNTRY,SNDP,PRCP,TYPE RAW");*/
-    socket.send("GET_COUNTRY CHINA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY JAPAN COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY TAIWAN COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY FIJI COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY TUVALU COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY GUAM COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY KIRIBATI COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY INDONESIA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY BRUNEI COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY SINGAPORE COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY KIRIBATI COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY MARSHALL_ISLANDS COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY WAKE_ISLAND COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY MIDWAY_ISLANDS COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY JOHNSTON_ATOLL COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY NEW_CALEDONIA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY SOLOMON_ISLANDS COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY COOK_ISLANDS COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY FRENCH_POLYNESIA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY NORFOLK_ISLAND COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY CHRISTMAS_ISLAND COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY PALAU COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY FEDERATED_STATES_OF_MICRONESIA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY NORTHERN_MARIANA_ISLANDS COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY WALLIS_AND_FUTUNA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY PAPUA_NEW_GUINEA COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
-    socket.send("GET_COUNTRY PHILIPPINES COUNTRY,STNAME,SNDP,PRCP,TYPE AVG");
+    init();
 };
+var counter = 1;
+var counterTwo = 1;
 socket.onmessage = function (evt) {
-/*    var txt = '{"name":"De Bilt","type":"AVG","country":"China","prcp":'+ y +',"sndp":'+(y+1)+'}';
-    y++;*/
-    console.log(evt.data);
     var obj = jQuery.parseJSON(evt.data);
-    console.log(obj);
-    if (obj.TYPE == 'AVG') {
-        updateChart(obj);
-        updateMap(obj);
-        updateTable(obj, false);
-    } else {
-        updateTable(obj, true);
-    }
+
+        if (obj.TYPE == 'AVG') {
+            if (counter == 1 || counter == 5 || counter == 10 || counter == 15 || counter == 20 || counter == 25) {
+                updateMap(obj);
+            }
+            if (counter == 1) {
+                //console.log(obj);
+                updateChart(obj);
+                updateTable(obj, false);
+            }
+            if (counter == 25){
+                counter = 0;
+            }
+            counter = counter + 1;
+        } else {
+            if (counterTwo == 1) {
+            updateTable(obj, true);
+            }
+            if (counterTwo == 50){
+                counterTwo = 0;
+            }
+            counterTwo = counterTwo + 1;
+        }
+
+
 };
-socket.onclose = function() {};
-socket.onerror = function(err) {};
+socket.onclose = function() {
+    init();
+};
+socket.onerror = function(err) {
+    init();
+};
+
+/* Utils */
+function capitalizeFirstLetter(string) {
+    var lowerString = string.toLowerCase();
+    var splitString = lowerString.split(" ");
+    var builder = "";
+
+    for (i = 0; i < splitString.length; i++) {
+        builder += splitString[i].charAt(0).toUpperCase() + splitString[i].slice(1);
+        if (i != splitString.length-1) builder += " ";
+    }
+    return builder;
+}
+
+function init() {
+    socket.send("GET_COAST PRCP AVG");
+    socket.send("GET_COAST PRCP RAW");
+    socket.send("GET_COUNTRY CHINA PRCP AVG");
+    socket.send("GET_COUNTRY JAPAN PRCP AVG");
+    socket.send("GET_COUNTRY TAIWAN PRCP AVG");
+    socket.send("GET_COUNTRY FIJI PRCP AVG");
+    socket.send("GET_COUNTRY TUVALU PRCP AVG");
+    socket.send("GET_COUNTRY GUAM PRCP AVG");
+    socket.send("GET_COUNTRY KIRIBATI PRCP AVG");
+    socket.send("GET_COUNTRY INDONESIA PRCP AVG");
+    socket.send("GET_COUNTRY BRUNEI PRCP AVG");
+    socket.send("GET_COUNTRY SINGAPORE PRCP AVG");
+    socket.send("GET_COUNTRY KIRIBATI PRCP AVG");
+    socket.send("GET_COUNTRY MARSHALL_ISLANDS PRCP AVG");
+    socket.send("GET_COUNTRY WAKE_ISLAND PRCP AVG");
+    socket.send("GET_COUNTRY MIDWAY_ISLANDS PRCP AVG");
+    socket.send("GET_COUNTRY JOHNSTON_ATOLL PRCP AVG");
+    socket.send("GET_COUNTRY NEW_CALEDONIA PRCP AVG");
+    socket.send("GET_COUNTRY SOLOMON_ISLANDS PRCP AVG");
+    socket.send("GET_COUNTRY COOK_ISLANDS PRCP AVG");
+    socket.send("GET_COUNTRY FRENCH_POLYNESIA PRCP AVG");
+    socket.send("GET_COUNTRY NORFOLK_ISLAND PRCP AVG");
+    socket.send("GET_COUNTRY CHRISTMAS_ISLAND PRCP AVG");
+    socket.send("GET_COUNTRY PALAU PRCP AVG");
+    socket.send("GET_COUNTRY FEDERATED_STATES_OF_MICRONESIA PRCP AVG");
+    socket.send("GET_COUNTRY NORTHERN_MARIANA_ISLANDS PRCP AVG");
+    socket.send("GET_COUNTRY WALLIS_AND_FUTUNA PRCP AVG");
+    socket.send("GET_COUNTRY PAPUA_NEW_GUINEA PRCP AVG");
+    socket.send("GET_COUNTRY PHILIPPINES PRCP AVG");
+    socket.send("GET_COUNTRY MONGOLIA PRCP AVG");
+    socket.send("GET_COUNTRY NORTH_KOREA PRCP AVG");
+    socket.send("GET_COUNTRY SOUTH_KOREA PRCP AVG");
+
+}

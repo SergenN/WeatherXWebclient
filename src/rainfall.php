@@ -34,7 +34,6 @@ include_once 'includes/navbar.php';
                 <tr>
                     <th data-field="country" data-sortable="true">Country</th>
                     <th data-field="prcp" data-sortable="true">Average rainfall</th>
-                    <th data-field="sndp" data-sortable="true">Average snowfall</th>
                 </tr>
                 </thead>
             </table>
@@ -55,7 +54,6 @@ include_once 'includes/navbar.php';
                     <th data-field="stn" data-sortable="true">Station</th>
                     <th data-field="country" data-sortable="true">Country</th>
                     <th data-field="prcp" data-sortable="true">Rainfall</th>
-                    <th data-field="sndp" data-sortable="true">Snowfall</th>
                 </tr>
                 </thead>
             </table>
