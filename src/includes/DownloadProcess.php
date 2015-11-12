@@ -18,12 +18,10 @@
             while ($file = readdir($handle)) {
                 if ($file != '.' && $file != '..') {
                     if (strpos($file,'.csv')) {
-                        if($first>0) {
+
                             $paths = "," . $path . "/" . $file;
-                        }else{
-                            $paths = $path."/".$file;
-                            $first++;
-                        }
+
+
                     }else{
                         list_all_files("$path/$file");
                     }

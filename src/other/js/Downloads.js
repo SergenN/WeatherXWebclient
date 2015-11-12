@@ -14,9 +14,12 @@ $.get("src/includes/DownloadProcess.php").done(function(data){
         var year = fileArgs[fileArgs.length-4];
 
         //MAKE JSON STRING
-        var dataString = '{"name":"'+fileName+'","year":"'+ year +'","month":"'+ month +'","day":"'+ day + '"}';
-        dataString=jQuery.parseJSON(dataString);
-        addRow(dataString);
+        if(day!=undefined){
+            var dataString = '{"name":"'+fileName+'","year":"'+ year +'","month":"'+ month +'","day":"'+ day + '"}';
+            dataString=jQuery.parseJSON(dataString);
+            addRow(dataString);
+        }
+
     }
 
 });
