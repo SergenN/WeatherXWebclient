@@ -7,6 +7,7 @@
  */
 $userLevel = 1;
 $title = "Downloads";
+$requiresLogin = true;
 
 require_once 'includes/init.php';
 include_once 'includes/header.php';
