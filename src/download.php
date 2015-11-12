@@ -12,6 +12,9 @@ $requiresLogin = true;
 require_once 'includes/init.php';
 include_once 'includes/header.php';
 include_once 'includes/navbar.php';
+
+
+
 ?>
     <style>
         .table-hover tbody tr:hover > td {
@@ -24,6 +27,8 @@ include_once 'includes/navbar.php';
             <h1>Downloads</h1>
             <h4>A table containing all downloadable history files</h4>
         </div>
+
+
 
         <div class="row">
             <div class="col-md-12">
